@@ -1,0 +1,17 @@
+{
+  "navi-mumbai-laundry": {
+    "customImage": "https://placehold.co/800x400/e0f2fe/1e3a8a?text=Navi+Mumbai+Laundry",
+    "localTagline": "Voted Navi Mumbai's #1 Laundry Service!",
+    "localTestimonial": "Fastest laundry delivery in Navi Mumbai! Excellent service. - Rahul"
+  },
+  "ayodhya-dry-cleaning": {
+    "customImage": "https://placehold.co/800x400/fefce8/a16207?text=Ayodhya+Dry+Cleaning",
+    "localTagline": "Premium Dry Cleaning for Ayodhya",
+    "localTestimonial": "Perfectly cleaned my expensive sherwani before the festival! - Amit"
+  },
+  "bhopal-home-cleaning": {
+    "customImage": "https://placehold.co/800x400/ecfdf5/166534?text=Bhopal+Home+Cleaning",
+    "localTagline": "Trusted Deep Home Cleaning everywhere in Bhopal",
+    "localTestimonial": "My house looks brand new. The team in Bhopal was so professional! - Priya"
+  }
+}

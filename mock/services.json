@@ -1,0 +1,192 @@
+[
+  {
+    "id": "1",
+    "slug": "laundry",
+    "name": "Laundry",
+    "shortDescription": "Perfect for everyday laundry — items returned neatly crispy folded.",
+    "longDescription": "Every cloth goes through a comprehensive process enabling us to deliver on the promise of sparkling & fresh clothes, every time. Wash & Fold, Wash & Iron, and Premium Laundry options available.",
+    "icon": "laundry",
+    "image": "/images/services/laundry.webp",
+    "features": [
+      "Wash & Fold",
+      "Wash & Iron",
+      "Premium Laundry",
+      "Express Service"
+    ],
+    "pricing": [
+      {
+        "name": "Wash & Fold",
+        "price": 59,
+        "unit": "KG",
+        "description": "Perfect for everyday clothes"
+      },
+      {
+        "name": "Wash & Iron",
+        "price": 89,
+        "unit": "KG",
+        "description": "Crisp and fresh"
+      },
+      {
+        "name": "Premium Laundry",
+        "price": 149,
+        "unit": "KG",
+        "description": "Best care for premium fabrics"
+      }
+    ],
+    "process": [
+      {
+        "step": 1,
+        "title": "Pickup",
+        "description": "We collect from your doorstep on schedule"
+      },
+      {
+        "step": 2,
+        "title": "Sorting",
+        "description": "Clothes sorted by fabric type and colour"
+      },
+      {
+        "step": 3,
+        "title": "Washing",
+        "description": "Professional wash with eco-friendly products"
+      },
+      {
+        "step": 4,
+        "title": "Delivery",
+        "description": "Delivered clean and fresh to your door"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "dry-cleaning",
+    "name": "Dry Cleaning",
+    "shortDescription": "All clothes cleaned with environment-friendly solvents.",
+    "longDescription": "State-of-the-art machinery processes each garment with highly acclaimed commercially used solvents. Clothes are dry cleaned according to their care label, ironed, and returned on hangers.",
+    "icon": "dry-cleaning",
+    "image": "/images/services/dry-cleaning.webp",
+    "features": [
+      "Eco-friendly solvents",
+      "State-of-the-art machinery",
+      "Fabric-specific treatment",
+      "On-hanger return"
+    ],
+    "pricing": [
+      {
+        "name": "Tops",
+        "price": 69,
+        "unit": "onwards",
+        "description": "Shirts, Kurtas, Blouses & more"
+      },
+      {
+        "name": "Bottoms",
+        "price": 59,
+        "unit": "onwards",
+        "description": "Trousers, Skirts, Boxers & Salwars"
+      },
+      {
+        "name": "Household",
+        "price": 59,
+        "unit": "onwards",
+        "description": "Bedsheets, Mats, Covers"
+      },
+      {
+        "name": "Full body",
+        "price": 199,
+        "unit": "onwards",
+        "description": "Coats, Jackets, Overcoats"
+      },
+      {
+        "name": "Accessories",
+        "price": 69,
+        "unit": "onwards",
+        "description": "Hoods, Ties, Stoles"
+      }
+    ],
+    "process": [
+      {
+        "step": 1,
+        "title": "Pickup",
+        "description": "We collect from your doorstep"
+      },
+      {
+        "step": 2,
+        "title": "Inspection",
+        "description": "Fabric and stain inspection by experts"
+      },
+      {
+        "step": 3,
+        "title": "Dry Cleaning",
+        "description": "Treated with eco-friendly solvents"
+      },
+      {
+        "step": 4,
+        "title": "Pressing & Delivery",
+        "description": "Pressed and returned on hangers"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "home-services",
+    "name": "Home Services",
+    "shortDescription": "Home cleaning, carpet & sofa cleaning, pest control and sanitization.",
+    "longDescription": "Choose from any of the services like home cleaning, carpet cleaning, sofa cleaning, pest control & sanitization — all at one place. Book via app or website at your convenience.",
+    "icon": "home",
+    "image": "/images/services/home-services.webp",
+    "features": [
+      "Home Cleaning",
+      "Carpet Cleaning",
+      "Sofa Cleaning",
+      "Pest Control",
+      "Sanitization"
+    ],
+    "pricing": [
+      {
+        "name": "Curtain Cleaning",
+        "price": 300,
+        "unit": "onwards",
+        "description": "Professional curtain cleaning services"
+      },
+      {
+        "name": "Carpet Cleaning",
+        "price": 25,
+        "unit": "per Sqft",
+        "description": "Professional carpet cleaning service"
+      },
+      {
+        "name": "Sofa Cleaning",
+        "price": 250,
+        "unit": "onwards",
+        "description": "Professional sofa cleaning services"
+      },
+      {
+        "name": "Car Cleaning",
+        "price": 499,
+        "unit": "onwards",
+        "description": "Professional car cleaning services"
+      }
+    ],
+    "process": [
+      {
+        "step": 1,
+        "title": "Book",
+        "description": "Schedule through app or website"
+      },
+      {
+        "step": 2,
+        "title": "Arrival",
+        "description": "Trained professionals arrive on time"
+      },
+      {
+        "step": 3,
+        "title": "Service",
+        "description": "Thorough cleaning with quality products"
+      },
+      {
+        "step": 4,
+        "title": "Satisfaction",
+        "description": "100% satisfaction guaranteed"
+      }
+    ]
+  }
+]

@@ -1,0 +1,416 @@
+[
+  {
+    "id": "1",
+    "name": "Agartala",
+    "slug": "agartala",
+    "state": "Tripura",
+    "storeCount": 1,
+    "lat": 23.8312377,
+    "lng": 91.2823821
+  },
+  {
+    "id": "2",
+    "name": "Aizawl",
+    "slug": "aizawl",
+    "state": "Mizoram",
+    "storeCount": 1,
+    "lat": 23.7277631,
+    "lng": 92.7179947
+  },
+  {
+    "id": "3",
+    "name": "Ayodhya",
+    "slug": "ayodhya",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.7990707,
+    "lng": 82.2052321
+  },
+  {
+    "id": "4",
+    "name": "Azamgarh",
+    "slug": "azamgarh",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.0654351,
+    "lng": 83.184439
+  },
+  {
+    "id": "5",
+    "name": "Bahadurgarh",
+    "slug": "bahadurgarh",
+    "state": "Haryana",
+    "storeCount": 1,
+    "lat": 28.6933239,
+    "lng": 76.9332373
+  },
+  {
+    "id": "6",
+    "name": "Belonia",
+    "slug": "belonia",
+    "state": "Tripura",
+    "storeCount": 1,
+    "lat": 23.2497879,
+    "lng": 91.4550309
+  },
+  {
+    "id": "7",
+    "name": "Bhiwani",
+    "slug": "bhiwani",
+    "state": "Haryana",
+    "storeCount": 1,
+    "lat": 28.7931703,
+    "lng": 76.1391283
+  },
+  {
+    "id": "8",
+    "name": "Bhopal",
+    "slug": "bhopal",
+    "state": "Madhya Pradesh",
+    "storeCount": 1,
+    "lat": 23.2584857,
+    "lng": 77.401989
+  },
+  {
+    "id": "9",
+    "name": "Budaun",
+    "slug": "budaun",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 28.0367001,
+    "lng": 79.1234
+  },
+  {
+    "id": "10",
+    "name": "Chandausi",
+    "slug": "chandausi",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 28.449104,
+    "lng": 78.7828513
+  },
+  {
+    "id": "11",
+    "name": "Dehradun",
+    "slug": "dehradun",
+    "state": "Uttarakhand",
+    "storeCount": 1,
+    "lat": 30.3255646,
+    "lng": 78.0436813
+  },
+  {
+    "id": "12",
+    "name": "Dharmanagar",
+    "slug": "dharmanagar",
+    "state": "Tripura",
+    "storeCount": 1,
+    "lat": 24.3734077,
+    "lng": 92.1655262
+  },
+  {
+    "id": "13",
+    "name": "Dibrugarh",
+    "slug": "dibrugarh",
+    "state": "Assam",
+    "storeCount": 1,
+    "lat": 27.4844597,
+    "lng": 94.9019447
+  },
+  {
+    "id": "14",
+    "name": "Gandhidham",
+    "slug": "gandhidham",
+    "state": "Gujarat",
+    "storeCount": 1,
+    "lat": 23.0718743,
+    "lng": 70.131715
+  },
+  {
+    "id": "15",
+    "name": "Ghaziabad",
+    "slug": "ghaziabad",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 28.6711527,
+    "lng": 77.4120356
+  },
+  {
+    "id": "16",
+    "name": "Gorakhpur",
+    "slug": "gorakhpur",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.7600217,
+    "lng": 83.3668129
+  },
+  {
+    "id": "17",
+    "name": "Greater Noida",
+    "slug": "greater-noida",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 28.4670734,
+    "lng": 77.5137649
+  },
+  {
+    "id": "18",
+    "name": "Gurugram",
+    "slug": "gurugram",
+    "state": "Haryana",
+    "storeCount": 1,
+    "lat": 28.4646148,
+    "lng": 77.0299194
+  },
+  {
+    "id": "19",
+    "name": "Guwahati",
+    "slug": "guwahati",
+    "state": "Assam",
+    "storeCount": 1,
+    "lat": 26.1805978,
+    "lng": 91.753943
+  },
+  {
+    "id": "20",
+    "name": "Hailakandi",
+    "slug": "hailakandi",
+    "state": "Assam",
+    "storeCount": 1,
+    "lat": 24.6846916,
+    "lng": 92.5645836
+  },
+  {
+    "id": "21",
+    "name": "Haldwani",
+    "slug": "haldwani",
+    "state": "Uttarakhand",
+    "storeCount": 1,
+    "lat": 29.2144809,
+    "lng": 79.5279012
+  },
+  {
+    "id": "22",
+    "name": "Hanumangarh",
+    "slug": "hanumangarh",
+    "state": "Rajasthan",
+    "storeCount": 1,
+    "lat": 29.6152878,
+    "lng": 74.2903968
+  },
+  {
+    "id": "23",
+    "name": "Hisar",
+    "slug": "hisar",
+    "state": "Haryana",
+    "storeCount": 1,
+    "lat": 29.1562688,
+    "lng": 75.7292303
+  },
+  {
+    "id": "24",
+    "name": "Ichalkaranji",
+    "slug": "ichalkaranji",
+    "state": "Maharashtra",
+    "storeCount": 1,
+    "lat": 16.6959348,
+    "lng": 74.4555755
+  },
+  {
+    "id": "25",
+    "name": "Jaipur",
+    "slug": "jaipur",
+    "state": "Rajasthan",
+    "storeCount": 1,
+    "lat": 26.9154576,
+    "lng": 75.8189817
+  },
+  {
+    "id": "26",
+    "name": "Jaunpur",
+    "slug": "jaunpur",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 25.7472,
+    "lng": 82.689
+  },
+  {
+    "id": "27",
+    "name": "Kanpur",
+    "slug": "kanpur",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.4609135,
+    "lng": 80.3217588
+  },
+  {
+    "id": "28",
+    "name": "Lakhimpur",
+    "slug": "lakhimpur",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 27.946309,
+    "lng": 80.7815166
+  },
+  {
+    "id": "29",
+    "name": "Lucknow",
+    "slug": "lucknow",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.8381,
+    "lng": 80.9346001
+  },
+  {
+    "id": "30",
+    "name": "Mau",
+    "slug": "mau",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 25.9391096,
+    "lng": 83.5716125
+  },
+  {
+    "id": "31",
+    "name": "Meerut",
+    "slug": "meerut",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 28.9963296,
+    "lng": 77.7061915
+  },
+  {
+    "id": "32",
+    "name": "Muzaffarnagar",
+    "slug": "muzaffarnagar",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 29.4662369,
+    "lng": 77.6961699
+  },
+  {
+    "id": "33",
+    "name": "Naharlagun",
+    "slug": "naharlagun",
+    "state": "Arunachal Pradesh",
+    "storeCount": 1,
+    "lat": 27.103045,
+    "lng": 93.6923923
+  },
+  {
+    "id": "34",
+    "name": "Nautanwa",
+    "slug": "nautanwa",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 27.4272664,
+    "lng": 83.418656
+  },
+  {
+    "id": "35",
+    "name": "Navi Mumbai",
+    "slug": "navi-mumbai",
+    "state": "Maharashtra",
+    "storeCount": 1,
+    "lat": 19.0308262,
+    "lng": 73.0198537
+  },
+  {
+    "id": "36",
+    "name": "New Delhi",
+    "slug": "new-delhi",
+    "state": "Delhi",
+    "storeCount": 1,
+    "lat": 28.6138954,
+    "lng": 77.2090057
+  },
+  {
+    "id": "37",
+    "name": "Noida",
+    "slug": "noida",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 28.5706333,
+    "lng": 77.3272147
+  },
+  {
+    "id": "38",
+    "name": "Raiganj",
+    "slug": "raiganj",
+    "state": "West Bengal",
+    "storeCount": 1,
+    "lat": 25.6271966,
+    "lng": 88.1317967
+  },
+  {
+    "id": "39",
+    "name": "Sikar",
+    "slug": "sikar",
+    "state": "Rajasthan",
+    "storeCount": 1,
+    "lat": 27.6091864,
+    "lng": 75.1395503
+  },
+  {
+    "id": "40",
+    "name": "Silchar",
+    "slug": "silchar",
+    "state": "Assam",
+    "storeCount": 1,
+    "lat": 24.829588,
+    "lng": 92.797148
+  },
+  {
+    "id": "41",
+    "name": "Sivasagar",
+    "slug": "sivasagar",
+    "state": "Assam",
+    "storeCount": 1,
+    "lat": 26.9834936,
+    "lng": 94.6394226
+  },
+  {
+    "id": "42",
+    "name": "Solan",
+    "slug": "solan",
+    "state": "Himachal Pradesh",
+    "storeCount": 1,
+    "lat": 30.9077569,
+    "lng": 77.1023645
+  },
+  {
+    "id": "43",
+    "name": "Sri Ganganagar",
+    "slug": "sri-ganganagar",
+    "state": "Rajasthan",
+    "storeCount": 1,
+    "lat": 29.9270556,
+    "lng": 73.8761519
+  },
+  {
+    "id": "44",
+    "name": "Thane",
+    "slug": "thane",
+    "state": "Maharashtra",
+    "storeCount": 1,
+    "lat": 19.1943294,
+    "lng": 72.9701779
+  },
+  {
+    "id": "45",
+    "name": "Varanasi",
+    "slug": "varanasi",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 25.3356491,
+    "lng": 83.0076292
+  },
+  {
+    "id": "46",
+    "name": "Zirakpur",
+    "slug": "zirakpur",
+    "state": "Punjab",
+    "storeCount": 1,
+    "lat": 30.6557257,
+    "lng": 76.8200648
+  }
+]

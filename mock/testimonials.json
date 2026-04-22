@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Ayush Vaishnav",
+    "city": "Lucknow",
+    "rating": 5,
+    "comment": "Excellent and quick dry cleaning service. My old blazer was stained with food items, but they made it look brand new within 24 hours. Awesome experience — looking forward to availing other services!",
+    "date": "2025-11-15"
+  },
+  {
+    "id": "2",
+    "name": "Adarsh Singh",
+    "city": "Gorakhpur",
+    "rating": 5,
+    "comment": "Excellent dry cleaning setup for all types of clothes. They use German organic chemicals and softeners for maximum cleaning and fabric care. Gave blankets and suits — got them cleaned in 12 hours. Highly recommended.",
+    "date": "2025-10-20"
+  },
+  {
+    "id": "3",
+    "name": "Vikas Chaudhary",
+    "city": "Delhi",
+    "rating": 5,
+    "comment": "Very nice optimized automated cleaning as per fabric requirements, rejuvenating the fabric. Nice and clean hygienic packing. Must try — one of the best in the city for all kinds of laundry and dry cleaning.",
+    "date": "2025-12-02"
+  },
+  {
+    "id": "4",
+    "name": "Alok Pratap Singh",
+    "city": "Noida",
+    "rating": 4,
+    "comment": "I live in Canada and came back after a year. The condition of my sofa was a mess. A friend told me about MyCleaners and I'm amazed — they really made me happy with their work.",
+    "date": "2025-09-18"
+  },
+  {
+    "id": "5",
+    "name": "Priya Sharma",
+    "city": "Gurugram",
+    "rating": 5,
+    "comment": "Honestly surprised by the quality. They picked up my clothes on time and delivered them perfectly pressed. The app makes scheduling so easy. Will definitely use again.",
+    "date": "2026-01-10"
+  },
+  {
+    "id": "6",
+    "name": "Rohit Verma",
+    "city": "Jaipur",
+    "rating": 5,
+    "comment": "Best laundry service in Jaipur by far. Affordable pricing, professional staff, and the clothes come back smelling fresh. The express delivery option is a lifesaver!",
+    "date": "2026-02-05"
+  }
+]
