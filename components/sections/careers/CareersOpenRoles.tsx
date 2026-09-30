@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 function applyMailto(roleTitle: string) {
-  const subject = encodeURIComponent(`Application – ${roleTitle} – MyCleaners`);
+  const subject = encodeURIComponent(`Application – ${roleTitle} – Mycleaners`);
   return `mailto:${SITE_EMAIL}?subject=${subject}`;
 }
 

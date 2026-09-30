@@ -56,14 +56,17 @@ export function Franchise_Testimonials() {
             const isActive = pos === 0;
             const isSide = pos === -1 || pos === 1;
 
+            /* Same stacking rule as CustomerTestimonialsCarousel: the sticky navbar is
+               z-30, so the carousel layers stay below it or the cards paint
+               over the nav while scrolling. */
             const positionClasses =
               pos === 0
-                ? "left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
+                ? "left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
                 : pos === -1
-                  ? "left-[18%] z-20 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[24%]"
+                  ? "left-[18%] z-10 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[24%]"
                   : pos === 1
-                    ? "left-[82%] z-20 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[76%]"
-                    : "left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-0";
+                    ? "left-[82%] z-10 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[76%]"
+                    : "left-1/2 z-0 pointer-events-none -translate-x-1/2 -translate-y-1/2 scale-90 opacity-0";
 
             return (
               <article
@@ -110,7 +113,7 @@ export function Franchise_Testimonials() {
             type="button"
             aria-label="Previous testimonial"
             onClick={goPrev}
-            className="absolute left-1 top-1/2 z-40 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:left-2"
+            className="absolute left-1 top-1/2 z-20 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:left-2"
           >
             <ChevronLeftIcon size={20} />
           </button>
@@ -118,7 +121,7 @@ export function Franchise_Testimonials() {
             type="button"
             aria-label="Next testimonial"
             onClick={goNext}
-            className="absolute right-1 top-1/2 z-40 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:right-2"
+            className="absolute right-1 top-1/2 z-20 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:right-2"
           >
             <ChevronRightIcon size={20} />
           </button>

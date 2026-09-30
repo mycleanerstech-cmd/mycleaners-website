@@ -1,3 +1,5 @@
+import { LEGAL_NAME } from "@/lib/constants";
+
 export type PrivacyTocItem = {
   number: number;
   title: string;
@@ -289,7 +291,7 @@ export const PRIVACY_SECTIONS: readonly PrivacySectionData[] = [
         type: "p",
         text: "If you have any questions or concerns about this Privacy Policy or the practices described herein, you may contact us at support@mycleaners.in or via customer support helpline.",
       },
-      { type: "p", text: "Mycleaners, Inc." },
+      { type: "p", text: LEGAL_NAME },
     ],
   },
 ] as const;

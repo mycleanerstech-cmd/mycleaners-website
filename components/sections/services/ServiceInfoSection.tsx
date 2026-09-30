@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { CheckIcon, SparkleIcon, TruckIcon } from "@/components/ui/icons";
 import { Button } from "@/components/ui/Button";
-import { SITE_PHONE, APP_LINKS } from "@/lib/constants";
+import { SITE_PHONE } from "@/lib/constants";
+import { SchedulePickupButton } from "@/components/ui/SchedulePickupButton";
 import { cn } from "@/lib/utils";
 
 type ProcessStep = {
@@ -92,11 +93,12 @@ export function ServiceInfoSection({
                   {ctaText}
                 </a>
               </Button>
-              <Button asChild variant="outline" className="w-full sm:w-auto h-12 text-[16px] px-8 rounded-full border-primary text-primary hover:text-primary hover:bg-primary/5 shadow-sm">
-                <a href={APP_LINKS.android} target="_blank" rel="noopener noreferrer">
-                  Download App
-                </a>
-              </Button>
+              {/* Was "Download App" → dead store link. Now the pickup CTA,
+                  outlined so it stays secondary to the call button. */}
+              <SchedulePickupButton
+                size="md"
+                className="h-12 w-full border-2 border-primary bg-transparent text-primary shadow-none hover:bg-primary hover:text-white sm:w-auto sm:px-8"
+              />
             </div>
 
             {showHowItWorks && process.length > 0 && (

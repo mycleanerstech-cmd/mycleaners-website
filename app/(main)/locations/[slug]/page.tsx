@@ -8,7 +8,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 import cities from "@/mock/cities.json";
-import { SITE_NAME, SITE_PHONE, SITE_WHATSAPP_LINK } from "@/lib/constants";
+import { SITE_PHONE, SITE_WHATSAPP_LINK } from "@/lib/constants";
 import { HowItWorksSection } from "@/components/sections/home/HowItWorksSection";
 import { DoYouKnowSection } from "@/components/sections/home/DoYouKnowSection";
 import { OurServicesSection } from "@/components/sections/home/OurServicesSection";
@@ -36,8 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Location" };
   }
 
+  // No brand suffix here: the root layout title template appends "| Mycleaners".
   return {
-    title: `${city.name} - ${SITE_NAME}`,
+    title: city.name,
     description: `Dry cleaning and laundry services in ${city.name}, ${city.state}.`,
   };
 }

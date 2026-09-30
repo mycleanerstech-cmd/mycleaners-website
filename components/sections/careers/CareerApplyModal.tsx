@@ -97,7 +97,7 @@ export function CareerApplyModal({ open, onClose }: CareerApplyModalProps) {
             id={titleId}
             className="text-heading-md font-bold text-primary sm:text-heading-lg"
           >
-            MyCleaners My Rider
+            Mycleaners My Rider
           </h2>
           <button
             type="button"

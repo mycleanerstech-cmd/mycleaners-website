@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!service) {
     return {
-      title: `Services | ${SITE_NAME}`,
+      title: "Services",
       description: `Explore ${SITE_NAME} services including laundry, dry cleaning, and home services with doorstep pickup and delivery.`,
     };
   }
 
   return {
-    title: `${service.name} | ${SITE_NAME}`,
+    title: service.name,
     description: service.shortDescription,
     alternates: { canonical: `/services/${slug}` },
   };
@@ -98,7 +98,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         <br />
         <br />
         <span>
-          Download the Mycleaners app today and experience the convenience of booking top-quality home 
+          Book a pickup online today and experience the convenience of top-quality home 
           cleaning services right from your phone.
         </span>
       </>

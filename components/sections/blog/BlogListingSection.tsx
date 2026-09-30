@@ -11,7 +11,7 @@ export function BlogListingSection({ posts }: { posts: BlogPost[] }) {
         <div className="mb-8">
           <SectionHeader
             title="Laundry & Dry Cleaning"
-            subtitle="Find everything from laundry tips and dry cleaning guides to exploring profitable laundry franchise opportunities, all here at MyCleaners."
+            subtitle="Find everything from laundry tips and dry cleaning guides to exploring profitable laundry franchise opportunities, all here at Mycleaners."
           />
         </div>
 

@@ -28,7 +28,7 @@ export function DoYouKnowSection() {
 
               <div>
                 <h3 className="text-[17px] font-semibold leading-tight text-dark sm:text-[20px]">
-                  MyCleaners is Perc free
+                  Mycleaners is Perc free
                 </h3>
                 <p className="mt-2 text-body-sm leading-relaxed text-dark-secondary sm:text-body-md">
                   We avoid Perchloroethylene (Perc) and use safer processes so your clothes are cleaned with less environmental impact.

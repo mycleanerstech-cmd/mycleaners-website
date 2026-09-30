@@ -1,47 +1,103 @@
 "use client";
 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { useState, type FormEvent } from "react";
-import { Button } from "@/components/ui/Button";
-import { SITE_WHATSAPP_LINK } from "@/lib/constants";
+import { useState } from "react";
+
+import {
+  CONTROL,
+  CONTROL_INVALID,
+  EnquirySuccess,
+  Field,
+  FormError,
+  Honeypot,
+  Select,
+  SubmitButton,
+} from "@/components/ui/EnquiryForm";
+import { useEnquirySubmit } from "@/components/ui/useEnquirySubmit";
+import { ENQUIRY_LEAD_SOURCE, ENQUIRY_TYPES, enquiryLeadSchema } from "@/lib/enquiry-schema";
+import { cn } from "@/lib/utils";
 
 type FormState = {
   name: string;
   mobile: string;
-  email: string;
+  enquiryType: string;
+  message: string;
   city: string;
+  /** Honeypot. Hidden from people, irresistible to bots. */
+  website: string;
 };
 
+const EMPTY_FORM: FormState = {
+  name: "",
+  mobile: "",
+  enquiryType: "",
+  message: "",
+  city: "",
+  website: "",
+};
+
+/**
+ * The Contact Us form. Also used on the About page, so it must stay compact.
+ *
+ * Sends name, phone, an enquiry type, a message, and an optional city. It asks
+ * for **no store**, and that is deliberate rather than an omission: a question
+ * like "do you cover Nashik?" or "what does a sofa cost?" is not about any one
+ * branch, so the lead is created unrouted and lands in the CRM's global queue
+ * for the central team. Forcing a branch would drop exactly the enquiries this
+ * form exists to catch.
+ *
+ * Email is absent on purpose. `Lead` has no email column, it would only land in
+ * a raw JSON field the CRM does not display, and phone is the channel the team
+ * already works from.
+ *
+ * The previous version opened a WhatsApp deep link and displayed "Submitted
+ * successfully" without submitting anything at all.
+ */
 export function About_Contact() {
-  const [form, setForm] = useState<FormState>({
-    name: "",
-    mobile: "",
-    email: "",
-    city: "",
-  });
-  const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
+  const [form, setForm] = useState<FormState>(EMPTY_FORM);
+  const { state, submit, clearFieldError, setValidationErrors } = useEnquirySubmit();
+
+  const errors = state.fieldErrors;
 
   function setField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
+    clearFieldError(key);
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    
-    // Construct dynamic WhatsApp message
-    const rawMessage = `Hii I am ${form.name} from ${form.city}. I want to know more about mycleaners.`;
-    const whatsappUrl = `${SITE_WHATSAPP_LINK}?text=${encodeURIComponent(rawMessage)}`;
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    // Open WhatsApp
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    // Validate in the browser first: a formatting problem should not become a
+    // network request, and should never be reported as a service failure.
+    //
+    // The outgoing payload is validated rather than the raw form state, because
+    // the state calls the field `mobile` (what the label says) while the API
+    // contract calls it `phone`. Validating state directly would fail on a
+    // missing `phone` before anything is ever sent.
+    const payload = {
+      source: ENQUIRY_LEAD_SOURCE,
+      name: form.name,
+      phone: form.mobile,
+      enquiryType: form.enquiryType,
+      message: form.message,
+      city: form.city,
+      website: form.website,
+    };
 
-    setSubmittedMessage("Submitted successfully. Our team will contact you soon.");
-    setForm({
-      name: "",
-      mobile: "",
-      email: "",
-      city: "",
-    });
+    const parsed = enquiryLeadSchema.safeParse(payload);
+    if (!parsed.success) {
+      const fieldErrors: Record<string, string> = {};
+      for (const issue of parsed.error.issues) {
+        const key = String(issue.path[0] ?? "form");
+        // Map API field names back to the form's own keys.
+        const mapped = key === "phone" ? "mobile" : key;
+        if (!fieldErrors[mapped]) fieldErrors[mapped] = issue.message;
+      }
+      setValidationErrors(fieldErrors);
+      return;
+    }
+
+    await submit("/api/contact", payload, () => setForm(EMPTY_FORM));
   }
 
   return (
@@ -65,64 +121,118 @@ export function About_Contact() {
                 Contact Us
               </h2>
               <p className="mt-2 text-center text-body-sm text-dark-muted">
-                Fill in your details and we will get in touch with you.
+                Tell us what you need and we will get back to you.
               </p>
 
-              <form onSubmit={handleSubmit} className="mt-5 sm:mt-6">
-                <div className="grid grid-cols-1 gap-y-4 gap-x-3 md:grid-cols-2 md:gap-y-5">
-                  <input
-                    value={form.name}
-                    onChange={(e) => setField("name", e.target.value)}
-                    placeholder="Name"
-                    type="text"
-                    autoComplete="name"
-                    required
-                    className="h-11 w-full rounded-lg border border-border-light bg-white px-3 text-[0.9375rem] text-dark outline-none transition-colors placeholder:text-dark-muted focus:border-primary focus-visible:outline-none focus-visible:ring-0"
-                  />
-
-                  <input
-                    value={form.mobile}
-                    onChange={(e) => setField("mobile", e.target.value)}
-                    placeholder="Mobile No."
-                    type="tel"
-                    inputMode="tel"
-                    autoComplete="tel"
-                    required
-                    className="h-11 w-full rounded-lg border border-border-light bg-white px-3 text-[0.9375rem] text-dark outline-none transition-colors placeholder:text-dark-muted focus:border-primary focus-visible:outline-none focus-visible:ring-0"
-                  />
-
-                  <input
-                    value={form.email}
-                    onChange={(e) => setField("email", e.target.value)}
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="h-11 w-full rounded-lg border border-border-light bg-white px-3 text-[0.9375rem] text-dark outline-none transition-colors placeholder:text-dark-muted focus:border-primary focus-visible:outline-none focus-visible:ring-0"
-                  />
-
-                  <input
-                    value={form.city}
-                    onChange={(e) => setField("city", e.target.value)}
-                    placeholder="City"
-                    type="text"
-                    autoComplete="address-level2"
-                    required
-                    className="h-11 w-full rounded-lg border border-border-light bg-white px-3 text-[0.9375rem] text-dark outline-none transition-colors placeholder:text-dark-muted focus:border-primary focus-visible:outline-none focus-visible:ring-0"
+              {state.isDone ? (
+                <div className="mt-6">
+                  <EnquirySuccess
+                    title="Thanks — we've got it"
+                    body="Your enquiry is with our team and someone will call you back shortly. For anything urgent, call or WhatsApp us and we'll sort it now."
                   />
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} noValidate className="mt-5 sm:mt-6">
+                  <div className="grid grid-cols-1 gap-y-4 gap-x-3 md:grid-cols-2 md:gap-y-5">
+                    <Field label="Name" required error={errors.name}>
+                      <input
+                        value={form.name}
+                        onChange={(e) => setField("name", e.target.value)}
+                        placeholder="Your name"
+                        type="text"
+                        autoComplete="name"
+                        className={cn("h-12", errors.name ? CONTROL_INVALID : CONTROL)}
+                        aria-invalid={Boolean(errors.name)}
+                      />
+                    </Field>
 
-                <div className="mt-5 flex justify-center sm:mt-7">
-                  <Button type="submit" variant="primary" size="md">
-                    Submit
-                  </Button>
-                </div>
-                {submittedMessage && (
-                  <p aria-live="polite" className="mt-3 text-center text-sm font-semibold text-success">
-                    {submittedMessage}
-                  </p>
-                )}
-              </form>
+                    {/* Errors are keyed by the form's own field names, mapped from
+                        the API's (`phone` → `mobile`) in the submit handler. */}
+                    <Field label="Mobile No." required error={errors.mobile}>
+                      <input
+                        value={form.mobile}
+                        onChange={(e) => setField("mobile", e.target.value)}
+                        placeholder="98765 43210"
+                        type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
+                        className={cn("h-12", errors.mobile ? CONTROL_INVALID : CONTROL)}
+                        aria-invalid={Boolean(errors.mobile)}
+                      />
+                    </Field>
+
+                    <div className="md:col-span-2">
+                      <Field
+                        label="This is about"
+                        required
+                        error={errors.enquiryType}
+                        hint="Pick the closest one"
+                      >
+                        <Select
+                          value={form.enquiryType}
+                          onChange={(value) => setField("enquiryType", value)}
+                          invalid={Boolean(errors.enquiryType)}
+                        >
+                          <option value="">Select a topic</option>
+                          {ENQUIRY_TYPES.map((type) => (
+                            <option key={type.value} value={type.value}>
+                              {type.label}
+                            </option>
+                          ))}
+                        </Select>
+                      </Field>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <Field
+                        label="Your message"
+                        required
+                        error={errors.message}
+                        hint="A sentence or two is plenty"
+                      >
+                        <textarea
+                          value={form.message}
+                          onChange={(e) => setField("message", e.target.value)}
+                          placeholder="How can we help?"
+                          rows={3}
+                          className={cn("py-3", errors.message ? CONTROL_INVALID : CONTROL)}
+                          aria-invalid={Boolean(errors.message)}
+                        />
+                      </Field>
+                    </div>
+
+                    <Field
+                      label="City"
+                      error={errors.city}
+                      hint="Optional — helps us answer faster"
+                    >
+                      <input
+                        value={form.city}
+                        onChange={(e) => setField("city", e.target.value)}
+                        placeholder="Where are you?"
+                        type="text"
+                        autoComplete="address-level2"
+                        className={cn("h-12", CONTROL)}
+                      />
+                    </Field>
+                  </div>
+
+                  <Honeypot value={form.website} onChange={(value) => setField("website", value)} />
+
+                  {state.formError && (
+                    <div className="mt-4">
+                      <FormError message={state.formError} />
+                    </div>
+                  )}
+
+                  <div className="mt-5 flex justify-center sm:mt-7">
+                    <SubmitButton
+                      isSubmitting={state.isSubmitting}
+                      label="Send Message"
+                    />
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

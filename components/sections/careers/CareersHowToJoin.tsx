@@ -76,7 +76,7 @@ export function CareersHowToJoin() {
             id="how-to-join-heading"
             className="text-[1.65rem] font-bold leading-tight tracking-tight text-dark sm:text-heading-lg sm:leading-[1.25] lg:text-[2rem]"
           >
-            How can you join MyCleaners?
+            How can you join Mycleaners?
           </h2>
           <p className="mt-3 text-body-md text-dark-muted">
             Four easy ways to get in—pick what feels right. No stuffy forms or endless portals unless

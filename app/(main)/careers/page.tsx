@@ -6,7 +6,7 @@ import { CareersOpenRoles } from "@/components/sections/careers/CareersOpenRoles
 import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Careers | ${SITE_NAME}`,
+  title: "Careers",
   description: `Join ${SITE_NAME}—open roles, flexible paths to apply, and teams across India.`,
 };
 

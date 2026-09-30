@@ -32,7 +32,7 @@ export const CAREER_JOIN_PATHS: readonly CareerJoinPath[] = [
     description:
       "Nothing listed for you yet? Send your resume and a line about what you’d love to do.",
     ctaLabel: "Email us",
-    href: `mailto:${SITE_EMAIL}?subject=${encodeURIComponent("Career inquiry – MyCleaners")}`,
+    href: `mailto:${SITE_EMAIL}?subject=${encodeURIComponent("Career inquiry – Mycleaners")}`,
     external: true,
   },
   {
@@ -48,7 +48,7 @@ export const CAREER_JOIN_PATHS: readonly CareerJoinPath[] = [
     id: "franchise",
     title: "Go bigger: franchise",
     description:
-      "Dreaming of running your own hub? See how partners grow with MyCleaners.",
+      "Dreaming of running your own hub? See how partners grow with Mycleaners.",
     ctaLabel: "Explore franchise",
     href: "/franchise",
   },
@@ -57,7 +57,7 @@ export const CAREER_JOIN_PATHS: readonly CareerJoinPath[] = [
 export const CAREER_ROLES: readonly CareerRole[] = [
   {
     id: "rider",
-    title: "MyCleaners My Rider",
+    title: "Mycleaners My Rider",
     description:
       "Flexible shifts picking up and dropping off orders. Earn shift-based pay plus tips, with mileage support—perfect if you like being on the move and meeting people across the city.",
   },
@@ -66,7 +66,7 @@ export const CAREER_ROLES: readonly CareerRole[] = [
     title: "Digital Marketer",
     meta: "Bachelor’s in digital marketing, engineering, or MBA preferred",
     description:
-      "Own our growth story across SEM, SEO, PPC, social, website updates, and email—experiment, measure, and scale campaigns that bring more customers to MyCleaners.",
+      "Own our growth story across SEM, SEO, PPC, social, website updates, and email—experiment, measure, and scale campaigns that bring more customers to Mycleaners.",
   },
   {
     id: "supply-chain",

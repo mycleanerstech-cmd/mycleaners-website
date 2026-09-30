@@ -2,13 +2,31 @@
 
 import { useEffect, useMemo, useState } from "react";
 import testimonials from "@/mock/customer_testimonials.json";
-import { ChevronLeftIcon, ChevronRightIcon, QuoteIcon } from "@/components/ui/icons";
+import { ChevronLeftIcon, ChevronRightIcon, QuoteIcon, StarIcon } from "@/components/ui/icons";
 
 type CustomerTestimonial = {
   name: string;
-  profile: string;
+  rating: number;
   text: string;
 };
+
+const MAX_RATING = 5;
+
+function RatingStars({ rating, className }: { rating: number; className?: string }) {
+  return (
+    <span className={`flex items-center gap-0.5 ${className ?? ""}`}>
+      {Array.from({ length: MAX_RATING }, (_, index) => (
+        <StarIcon
+          key={index}
+          size={14}
+          filled={index < rating}
+          aria-hidden="true"
+          className={index < rating ? "text-primary" : "text-border-light"}
+        />
+      ))}
+    </span>
+  );
+}
 
 function getRelativePosition(index: number, activeIndex: number, total: number): -1 | 0 | 1 | 2 {
   const forward = (index - activeIndex + total) % total;
@@ -61,9 +79,11 @@ export function CustomerTestimonialsCarousel() {
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-dark/8 text-dark">
                 <span className="text-sm font-semibold">{activeItem.name.charAt(0)}</span>
               </div>
-              <div>
+              <div className="text-center">
                 <p className="font-semibold text-dark">{activeItem.name}</p>
-                <p className="text-sm text-dark-muted">{activeItem.profile}</p>
+                <div className="mt-1 flex justify-center">
+                  <RatingStars rating={activeItem.rating} />
+                </div>
               </div>
             </div>
           </article>
@@ -95,18 +115,22 @@ export function CustomerTestimonialsCarousel() {
             const isActive = pos === 0;
             const isSide = pos === -1 || pos === 1;
 
+            /* The sticky navbar is z-30, so every layer here must stay below it.
+               Tying the active card to z-30 (or going higher for the arrows) let
+               the cards paint over the nav, because they come later in the DOM
+               and the header creates the stacking context they sit beside. */
             const positionClasses =
               pos === 0
-                ? "left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
+                ? "left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
                 : pos === -1
-                  ? "left-[18%] z-20 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[24%]"
+                  ? "left-[18%] z-10 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[24%]"
                   : pos === 1
-                    ? "left-[82%] z-20 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[76%]"
-                    : "left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 scale-90 opacity-0";
+                    ? "left-[82%] z-10 hidden -translate-x-1/2 -translate-y-1/2 scale-95 opacity-35 md:block lg:left-[76%]"
+                    : "left-1/2 z-0 pointer-events-none -translate-x-1/2 -translate-y-1/2 scale-90 opacity-0";
 
             return (
               <article
-                key={`${item.name}-${item.profile}-${index}`}
+                key={`${item.name}-${index}`}
                 className={`absolute top-1/2 w-[92vw] max-w-[520px] rounded-3xl border bg-white p-5 transition-all duration-700 ease-smooth sm:p-7 md:w-[82vw] md:max-w-[410px] ${
                   isActive
                     ? "border-primary/70 shadow-[0_0_0_1px_rgba(245,130,32,0.35),0_16px_38px_rgba(245,130,32,0.25)]"
@@ -134,13 +158,13 @@ export function CustomerTestimonialsCarousel() {
                   >
                     <span className="text-sm font-semibold">{item.name.charAt(0)}</span>
                   </div>
-                  <div>
+                  <div className="text-center">
                     <p className={`font-semibold ${isActive ? "text-dark" : "text-dark/45"}`}>
                       {item.name}
                     </p>
-                    <p className={`text-sm ${isActive ? "text-dark-muted" : "text-dark/35"}`}>
-                      {item.profile}
-                    </p>
+                    <div className="mt-1 flex justify-center">
+                      <RatingStars rating={item.rating} className={isActive ? undefined : "opacity-60"} />
+                    </div>
                   </div>
                 </div>
               </article>
@@ -151,7 +175,7 @@ export function CustomerTestimonialsCarousel() {
             type="button"
             aria-label="Previous testimonial"
             onClick={goPrev}
-            className="absolute left-1 top-1/2 z-40 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:left-2"
+            className="absolute left-1 top-1/2 z-20 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:left-2"
           >
             <ChevronLeftIcon size={20} />
           </button>
@@ -159,7 +183,7 @@ export function CustomerTestimonialsCarousel() {
             type="button"
             aria-label="Next testimonial"
             onClick={goNext}
-            className="absolute right-1 top-1/2 z-40 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:right-2"
+            className="absolute right-1 top-1/2 z-20 -translate-y-1/2 rounded-full bg-primary p-2 text-white shadow-btn transition-all hover:scale-105 hover:bg-primary-dark sm:right-2"
           >
             <ChevronRightIcon size={20} />
           </button>

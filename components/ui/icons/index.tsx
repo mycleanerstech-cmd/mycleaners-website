@@ -1,6 +1,8 @@
 import type { SVGProps } from "react";
 import {
   ArrowRight as LucideArrowRight,
+  Bell as LucideBell,
+  Building2 as LucideBuilding2,
   Calendar as LucideCalendar,
   Check as LucideCheck,
   ChevronLeft as LucideChevronLeft,
@@ -12,6 +14,8 @@ import {
   Heart as LucideHeart,
   House as LucideHome,
   IndianRupee as LucideIndianRupee,
+  Landmark as LucideLandmark,
+  LayoutGrid as LucideLayoutGrid,
   Leaf as LucideLeaf,
   Mail as LucideMail,
   MapPin as LucideMapPin,
@@ -21,7 +25,9 @@ import {
   Smartphone as LucideSmartphone,
   Sparkles as LucideSparkles,
   Star as LucideStar,
+  Shirt as LucideShirt,
   Truck as LucideTruck,
+  WashingMachine as LucideWashingMachine,
   X as LucideX,
 } from "lucide-react";
 
@@ -42,6 +48,8 @@ export const ArrowRightIcon = (props: IconProps) => <LucideArrowRight {...props}
 export const PhoneIcon = (props: IconProps) => <LucidePhone {...props} />;
 export const MailIcon = (props: IconProps) => <LucideMail {...props} />;
 export const MapPinIcon = (props: IconProps) => <LucideMapPin {...props} />;
+export const LandmarkIcon = (props: IconProps) => <LucideLandmark {...props} />;
+export const BuildingIcon = (props: IconProps) => <LucideBuilding2 {...props} />;
 
 export function LinkedinIcon({ size = 24, className, ...props }: IconProps) {
   return (
@@ -148,6 +156,10 @@ export const EyeIcon = (props: IconProps) => <LucideEye {...props} />;
 export const RupeeIcon = (props: IconProps) => <LucideIndianRupee {...props} />;
 export const DownloadIcon = (props: IconProps) => <LucideDownload {...props} />;
 export const CalendarIcon = (props: IconProps) => <LucideCalendar {...props} />;
+export const GridIcon = (props: IconProps) => <LucideLayoutGrid {...props} />;
+export const BellIcon = (props: IconProps) => <LucideBell {...props} />;
+export const ShirtIcon = (props: IconProps) => <LucideShirt {...props} />;
+export const WashingMachineIcon = (props: IconProps) => <LucideWashingMachine {...props} />;
 
 export function QuoteIcon({ size = 24, className, ...props }: IconProps) {
   return (

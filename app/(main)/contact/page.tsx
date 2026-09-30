@@ -6,7 +6,7 @@ import { City_We_Work } from "@/components/sections/City_We_Work";
 import { SITE_EMAIL, SITE_NAME, SITE_PHONE_DISPLAY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Contact Us | ${SITE_NAME}`,
+  title: "Contact Us",
   description: `Get in touch with ${SITE_NAME} for pickups, service support, and partnerships. Call ${SITE_PHONE_DISPLAY} or email ${SITE_EMAIL}.`,
 };
 

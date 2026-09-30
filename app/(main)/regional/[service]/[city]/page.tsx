@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/lib/constants";
 import citiesData from "@/mock/cities.json";
 import servicesData from "@/mock/services.json";
 import regionalContent from "@/mock/regional-content.json";
@@ -35,10 +36,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
   const cityName = isValidCity.name;
 
   return {
-    title: `Best ${serviceName} Service in ${cityName} | Ycleaners`,
-    description: `Looking for top-rated ${serviceName} services in ${cityName}? Ycleaners offers premium, affordable, and fast home delivery.`,
+    // No brand suffix here: the root layout title template appends "| Mycleaners".
+    title: `Best ${serviceName} Service in ${cityName}`,
+    description: `Looking for top-rated ${serviceName} services in ${cityName}? Mycleaners offers premium, affordable, and fast home delivery.`,
     alternates: {
-      canonical: `https://ycleaners.in/best-${service}-in-${city}`,
+      canonical: `${SITE_URL}/best-${service}-in-${city}`,
     }
   };
 }

@@ -37,7 +37,7 @@ const TERMS: readonly TermItem[] = [
   },
   {
     id: "Q5",
-    question: "What is MyCleaners policy on items with risk of damage during cleaning?",
+    question: "What is Mycleaners policy on items with risk of damage during cleaning?",
     answer:
       "We are not responsible for fastness, color bleed, color running, shrinkage, damages to embellishments or embroidery work on the articles during processing. We would be putting in our best efforts to remove any stains or unwanted marks on the clothes; however we cannot guarantee 100% removal of stains or marks. Customers will have no claim whatsoever or no rights to ask for deduction in processing charges on account of this.",
   },
@@ -49,7 +49,7 @@ const TERMS: readonly TermItem[] = [
   },
   {
     id: "Q7",
-    question: "What happens if MyCleaners loses or damages one of my items?",
+    question: "What happens if Mycleaners loses or damages one of my items?",
     answer:
       "We will do everything that we can to return your garments to you in perfect shape. In the rare occasion that a thing disappears or is harmed during the cleaning procedure, we will provide reimbursement up to the maximum of 7-10 times of the service value, as per our terms and conditions.",
   },

@@ -31,7 +31,7 @@ export function Careers_Hero() {
             id="careers-hero-heading"
             className="text-display-sm text-dark sm:text-display-md lg:text-display-lg"
           >
-            Join MyCleaners team
+            Join Mycleaners team
           </h1>
           <p className="mt-5 text-body-lg text-dark/95 leading-relaxed">
             Join the team of passionate and hardworking people trying to build

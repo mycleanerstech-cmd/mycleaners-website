@@ -1,9 +1,8 @@
 "use client";
 
-import { type FormEvent, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import faqs from "@/mock/faqs.json";
 import { cn } from "@/lib/utils";
-import { SITE_WHATSAPP_LINK } from "@/lib/constants";
 
 type FaqItem = {
   id: string;
@@ -36,29 +35,6 @@ function AnswerBody({ text }: { text: string }) {
 export function FAQs() {
   const items = useMemo(() => faqs as FaqItem[], []);
   const [openId, setOpenId] = useState<string | null>(null);
-  const [customerQuestion, setCustomerQuestion] = useState("");
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const handleQuestionSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const cleanedQuestion = customerQuestion.trim();
-    if (!cleanedQuestion) return;
-
-    const confirmMessage = `You are about to send the following message to WhatsApp:\n\n"${cleanedQuestion}"\n\nClick OK to proceed.`;
-    
-    if (window.confirm(confirmMessage)) {
-      // Open WhatsApp with the typed question pre-filled
-      const whatsappUrl = `${SITE_WHATSAPP_LINK}?text=${encodeURIComponent(cleanedQuestion)}`;
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      setCustomerQuestion("");
-    }
-  };
-
-  useEffect(() => {
-    if (!toastMessage) return;
-    const timerId = window.setTimeout(() => setToastMessage(null), 3500);
-    return () => window.clearTimeout(timerId);
-  }, [toastMessage]);
 
   return (
     <section className="w-full bg-white" aria-labelledby="faq-heading">
@@ -131,49 +107,7 @@ export function FAQs() {
             );
           })}
         </div>
-
-        <div className="mt-8 w-full rounded-2xl border border-border-light bg-surface p-4 sm:mt-10 sm:p-5 md:p-6">
-          <h3 className="text-base font-semibold text-dark sm:text-[1.0625rem]">
-            Didn&apos;t find your question?
-          </h3>
-          <p className="mt-1 text-sm text-dark-muted sm:text-[0.9375rem]">
-            Ask your own question and we will add it to the FAQ after review.
-          </p>
-
-          <form className="mt-4 flex flex-col gap-3 sm:flex-row" onSubmit={handleQuestionSubmit}>
-            <label htmlFor="customer-question" className="sr-only">
-              Enter your question
-            </label>
-            <input
-              id="customer-question"
-              type="text"
-              value={customerQuestion}
-              onChange={(event) => setCustomerQuestion(event.target.value)}
-              placeholder="Type your question here..."
-              className="h-11 w-full rounded-lg border border-border-light bg-white px-3 text-[0.9375rem] text-dark outline-none transition-colors placeholder:text-dark-muted/80 focus:border-border-light focus-visible:outline-none focus-visible:ring-0"
-            />
-            <button
-              type="submit"
-              disabled={!customerQuestion.trim()}
-              className="inline-flex h-11 items-center justify-center rounded-lg bg-primary px-5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-primary/60"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
       </div>
-
-      {toastMessage && (
-        <div
-          role="status"
-          aria-live="polite"
-          className="fixed right-4 bottom-6 z-50 pointer-events-none sm:right-6 sm:bottom-6"
-        >
-          <div className="inline-flex max-w-[calc(100vw-2rem)] items-center wrap-break-word rounded-lg bg-primary px-3 py-2 text-center text-xs font-semibold text-white shadow-btn sm:px-3 sm:text-sm">
-            {toastMessage}
-          </div>
-        </div>
-      )}
     </section>
   );
 }

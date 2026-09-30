@@ -6,12 +6,11 @@ import { About_Four } from "@/components/sections/about/About_Four";
 import { About_Two } from "@/components/sections/about/About_Two";
 import { About_Vision } from "@/components/sections/about/About_Vision";
 import { City_We_Work } from "@/components/sections/City_We_Work";
-import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `About Us | ${SITE_NAME}`,
+  title: "About Us",
   description:
-    "Learn about MyCleaners—our mission, vision, and commitment to premium laundry and dry cleaning with convenient doorstep pickup and delivery.",
+    "Learn about Mycleaners—our mission, vision, and commitment to premium laundry and dry cleaning with convenient doorstep pickup and delivery.",
 };
 
 export default function AboutPage() {

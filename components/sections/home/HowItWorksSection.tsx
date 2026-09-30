@@ -1,10 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo } from "react";
-import { APP_LINKS, HOW_IT_WORKS_STEPS, SITE_NAME } from "@/lib/constants";
-import { Button } from "@/components/ui/Button";
-import { DownloadIcon } from "@/components/ui/icons";
+import { HOW_IT_WORKS_STEPS, SITE_NAME } from "@/lib/constants";
 
 export function HowItWorksSection() {
   const steps = useMemo(() => HOW_IT_WORKS_STEPS, []);
@@ -44,26 +41,6 @@ export function HowItWorksSection() {
                 </div>
               );
             })}
-          </div>
-        </div>
-
-        <div className="mt-12 sm:mt-16 flex flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-start sm:gap-6">
-          <div className="w-full sm:w-auto">
-            <Button variant="primary" size="lg" fullWidth asChild>
-              <Link href="/contact">Schedule Free Pick up</Link>
-            </Button>
-          </div>
-          <div className="w-full sm:w-auto">
-            <Button variant="secondary" size="lg" fullWidth asChild>
-              <a
-                href={APP_LINKS.android}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <DownloadIcon size={18} />
-                Download {SITE_NAME} App
-              </a>
-            </Button>
           </div>
         </div>
       </div>

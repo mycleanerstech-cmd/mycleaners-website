@@ -60,7 +60,7 @@ export function Donations({ className }: { className?: string }) {
               Donations
             </h1>
             <p className="mt-4 text-pretty text-[15px] leading-7 text-dark/75 sm:text-[16px]">
-              MyCleaners has partnered with Raise India Foundation,which is a non-profit organization working for the betterment of the underprivileged. Our aim is to provide garment donations to those in need.
+              Mycleaners has partnered with Raise India Foundation,which is a non-profit organization working for the betterment of the underprivileged. Our aim is to provide garment donations to those in need.
             </p>
           </div>
 

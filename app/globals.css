@@ -253,6 +253,85 @@ body {
   animation: vision-frame-glow 3.8s ease-in-out infinite;
 }
 
+@keyframes app-soon-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+/* Intro-video hero scrim.
+   The footage is already a dark, busy image, so a flat wash either drowns it or
+   leaves the copy unreadable. Instead the overlay is directional: heavy on the
+   left where the headline sits, light through the middle-right so the person in
+   frame still reads as photography. The far right picks back up slightly so the
+   stats card keeps contrast against whatever passes behind it. */
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.68) 34%,
+    rgba(0, 0, 0, 0.24) 66%,
+    rgba(0, 0, 0, 0.38) 100%
+  );
+}
+
+/* Below `lg` the copy spans the full width, so the horizontal ramp has nothing
+   to protect and an even vertical wash (dark top for the navbar, dark bottom
+   for the fade into the next section) does the job instead. */
+@media (max-width: 1023px) {
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.55) 42%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+  }
+}
+
+/* Sticky navbar while it sits over the hero. Only applied once the page has
+   scrolled: at rest the hero runs edge to edge under the nav, and glassing it
+   would draw a bar across the top of the video for no contrast gain. */
+.hero-nav-glass {
+  background: rgba(20, 20, 20, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Horizontal scrollers that should not show a scrollbar (e.g. the hero
+   service strip on narrow screens). The content stays scrollable/swipeable;
+   only the visible track is hidden. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* "App Coming Soon" status dot ripple */
+.app-soon-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: app-soon-pulse 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-soon-dot::after {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .phone-icon-bob {
     animation: none;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { APP_LINKS, NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import { NAV_LINKS, PICKUP_HREF, SCHEDULE_PICKUP_LABEL, SITE_NAME } from "@/lib/constants";
 import { useIsScrolled } from "@/lib/hooks/useScrollPosition";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, MenuIcon } from "@/components/ui/icons";
@@ -116,9 +116,14 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-30 w-full transition-shadow duration-300",
+          "sticky top-0 z-30 w-full transition-[background-color,box-shadow] duration-300",
+          // Three states, not two. Over the hero at rest the nav is invisible so
+          // the video runs edge to edge; once the page scrolls it turns to glass
+          // so it reads as sitting on the footage rather than floating over it.
           isHeroNavbar
-            ? "bg-transparent shadow-none border-b-0"
+            ? isScrolled
+              ? "hero-nav-glass border-b border-white/10 shadow-none"
+              : "bg-transparent shadow-none border-b-0"
             : "bg-white",
           !isHeroNavbar && (isScrolled ? "shadow-nav" : "border-b border-transparent")
         )}
@@ -131,15 +136,34 @@ export function Navbar() {
           <Link
             href="/"
             aria-label={`${SITE_NAME} — Home`}
-            className="flex items-center gap-2 shrink-0"
+            className="relative flex items-center gap-2 shrink-0"
           >
+            {/* Both files are cropped to their artwork, so the height classes below
+                set the visible wordmark height directly (24 / 28 / 32px). The white
+                logo is absolutely positioned and ~8px narrower, so the hero/scrolled
+                swap never shifts the nav links. The step up to 32px waits for xl
+                because the nav links + app badges need the extra room below a
+                1200px container. */}
             <Image
-              src="/images/My_Cleaners_Final_Logo.png"
+              src="/images/logo.png"
               alt={`${SITE_NAME} logo`}
-              width={256}
-              height={64}
-              style={{ width: "auto" }}
-              className="h-16 w-auto select-none"
+              width={226}
+              height={32}
+              className={cn(
+                "h-6 sm:h-7 xl:h-8 w-auto select-none transition-opacity duration-300",
+                isHeroNavbar ? "opacity-0" : "opacity-100"
+              )}
+            />
+            <Image
+              src="/images/white-logo.png"
+              alt=""
+              aria-hidden="true"
+              width={218}
+              height={32}
+              className={cn(
+                "absolute left-0 top-1/2 h-6 sm:h-7 xl:h-8 w-auto -translate-y-1/2 select-none transition-opacity duration-300",
+                isHeroNavbar ? "opacity-100" : "opacity-0"
+              )}
             />
           </Link>
 
@@ -164,7 +188,7 @@ export function Navbar() {
                       aria-expanded={servicesOpen}
                       onClick={() => setServicesOpen((prev) => !prev)}
                       className={cn(
-                        "px-4 py-2 rounded-lg text-body-sm font-medium transition-colors duration-150 inline-flex items-center gap-1",
+                        "px-3 py-2 xl:px-4 rounded-lg text-body-sm font-medium transition-colors duration-150 inline-flex items-center gap-1",
                         isActive
                           ? "text-primary bg-primary-light"
                           : isHeroNavbar
@@ -235,7 +259,7 @@ export function Navbar() {
                       aria-expanded={locationsOpen}
                       onClick={() => setLocationsOpen((prev) => !prev)}
                       className={cn(
-                        "px-4 py-2 rounded-lg text-body-sm font-medium transition-colors duration-150 inline-flex items-center gap-1",
+                        "px-3 py-2 xl:px-4 rounded-lg text-body-sm font-medium transition-colors duration-150 inline-flex items-center gap-1",
                         isActive
                           ? "text-primary bg-primary-light"
                           : isHeroNavbar
@@ -326,7 +350,7 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "px-4 py-2 rounded-lg text-body-sm font-medium transition-colors duration-150",
+                      "px-3 py-2 xl:px-4 rounded-lg text-body-sm font-medium transition-colors duration-150",
                       isActive
                         ? "text-primary bg-primary-light"
                         : isHeroNavbar
@@ -342,57 +366,31 @@ export function Navbar() {
             })}
           </ul>
 
-          {/* ── Desktop App Buttons ── */}
-          <div className="hidden md:flex items-center gap-3">
-            {isHeroNavbar ? (
-              <>
-                <a
-                  href={APP_LINKS.android}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-lg text-body-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-150"
-                >
-                  Android App
-                </a>
-                <a
-                  href={APP_LINKS.ios}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-lg text-body-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-150"
-                >
-                  iOS App
-                </a>
-              </>
-            ) : (
-              <>
-                <a
-                  href={APP_LINKS.android}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-lg bg-black border border-white/30 hover:bg-black/85 transition-colors text-white whitespace-nowrap"
-                >
-                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <path d="M2.4 1.8c-.2.2-.4.6-.4 1.1V21c0 .5.2.9.4 1.1l10.4-10.1L2.4 1.8z" fill="#00A0FF" />
-                    <path d="M13.2 12l2.7-2.6-9.6-5.5L13.2 12z" fill="#EA4335" />
-                    <path d="M13.2 12l2.7 2.6-9.6 5.5L13.2 12z" fill="#34A853" />
-                    <path d="M16.4 9.8l3.8 2.2c.8.5.8 1.3 0 1.8l-3.8 2.2-3.2-3.1 3.2-3.1z" fill="#FBBC04" />
-                  </svg>
-                  <span className="text-[13px] font-semibold leading-none">Android App</span>
-                </a>
-                <a
-                  href={APP_LINKS.ios}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-lg bg-black border border-white/30 hover:bg-black/85 transition-colors text-white whitespace-nowrap"
-                >
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                  </svg>
-                  <span className="text-[13px] font-semibold leading-none">iOS App</span>
-                </a>
-              </>
+          {/* ── App Status ── */}
+          {/* Shown from lg up: below 1024px the links + logo already fill the row. */}
+          {/* The old Android/iOS links pointed at retired store listings, so the
+              app is teased as "Coming Soon" instead of linking anywhere. Swap
+              this back for two store badges when APP_AVAILABLE flips to true. */}
+          {/* ── Schedule Pickup ── */}
+          {/* Booking is the one action that has to stay reachable from every page,
+              so it lives in the nav rather than only in the hero. It borrows the
+              App badge's chrome — a translucent outlined pill rather than a solid
+              fill — so the bar stays light: over the video that glass outline is
+              the only thing legible against moving footage, and on the white nav
+              the same shape reads as a partial orange rather than a solid block
+              of brand colour. It carries a little more weight than the old static
+              badge because this one is a real, focusable link. */}
+          <Link
+            href={PICKUP_HREF}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-full border px-4 text-[13px] font-semibold leading-none whitespace-nowrap transition-colors duration-200 xl:h-10 xl:px-5 xl:text-sm",
+              isHeroNavbar
+                ? "border-white/25 bg-white/10 text-white hover:bg-white/20"
+                : "border-primary/30 bg-primary-light text-primary-dark hover:border-primary/50 hover:bg-primary/15"
             )}
-          </div>
+          >
+            {SCHEDULE_PICKUP_LABEL}
+          </Link>
 
           {/* ── Mobile Hamburger ── */}
           <button

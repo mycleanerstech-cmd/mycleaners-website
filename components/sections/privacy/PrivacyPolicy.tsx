@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, LEGAL_NAME } from "@/lib/constants";
 import { PRIVACY_SECTIONS, PRIVACY_TOC } from "@/lib/privacy-policy";
 import { City_We_Work } from "@/components/sections/City_We_Work";
 import { PrivacyHero } from "@/components/sections/privacy/PrivacyHero";
@@ -18,9 +18,9 @@ export function PrivacyPolicy() {
           <div className="min-w-0 flex-1 space-y-6">
             <div className="rounded-2xl border border-border-light bg-white shadow-card p-5 sm:p-6">
               <p className="text-body-sm leading-relaxed text-dark-secondary">
-                Mycleaners, Inc. (Mycleaners) is committed to protecting our visitors’ and members’
-                privacy. This Privacy Policy describes the types of information that Mycleaners
-                collects from and about you when you visit our website,{" "}
+                {LEGAL_NAME} (Mycleaners) is committed to protecting our visitors&rsquo; and
+                members&rsquo; privacy. This Privacy Policy describes the types of information that
+                Mycleaners collects from and about you when you visit our website,{" "}
                 <Link
                   href={SITE_URL}
                   target="_blank"

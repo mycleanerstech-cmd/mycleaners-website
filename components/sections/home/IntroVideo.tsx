@@ -1,9 +1,26 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { SITE_WHATSAPP_LINK, APP_LINKS } from "@/lib/constants";
+import { ArrowRightIcon } from "@/components/ui/icons";
+import { SchedulePickupButton } from "@/components/ui/SchedulePickupButton";
+import { PICKUP_HREF } from "@/lib/constants";
+
+/**
+ * The services the hero advertises.
+ *
+ * These used to be four glass pills, which is roughly a full row of height for a
+ * row of navigation. As a single quiet line they cost a line instead, and the
+ * video gets the vertical space back. They stay real links: the row is low
+ * contrast until hover, but it is still the fastest route for a visitor who
+ * already knows what they need. "Doorstep Pickup" is a process rather than a
+ * service, so it points at the booking flow instead of a service page.
+ */
+const SERVICE_LINKS = [
+  { label: "Laundry", href: "/services/laundry" },
+  { label: "Dry Cleaning", href: "/services/dry-cleaning" },
+  { label: "Home Cleaning", href: "/services/home-services" },
+  { label: "Doorstep Pickup", href: PICKUP_HREF },
+] as const;
 
 export function IntroVideo() {
   return (
@@ -12,7 +29,6 @@ export function IntroVideo() {
       // Offset the hero up so the sticky navbar background doesn't reveal the white body.
       className="relative w-full overflow-hidden bg-black -mt-[72px] mb-0"
     >
-      {/* Responsive hero container: Stacked on mobile, full-screen overlay on desktop */}
       <div className="flex flex-col relative min-h-[calc(100svh+72px)] bg-black">
         <video
           src="/videos/Intro_video.mov"
@@ -24,40 +40,83 @@ export function IntroVideo() {
           preload="auto"
         />
 
-        {/* Overlay for readability */}
-        <div className="pointer-events-none absolute inset-0 bg-black/40 xl:bg-gradient-to-t from-black/60 via-black/30 md:from-black/70 md:via-black/40 to-transparent" />
-        
-        {/* Bottom shadow gradient */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/90 to-transparent" />
+        {/* Readability wash. Deliberately not flat: see `.hero-scrim` in
+            globals.css — the left column is pushed down for contrast while the
+            right half, where the person stands, is left bright enough to still
+            read as photography. */}
+        <div className="hero-scrim pointer-events-none absolute inset-0" />
+
+        {/* Bottom shadow gradient, softening the cut from video to the white
+            section below. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black via-black/75 to-transparent" />
 
         {/* Content layout: Flows naturally on mobile, absolute center on desktop */}
-        <div className="absolute inset-0 flex items-center pt-[104px] pb-12 sm:pt-[128px] md:pb-0 md:pt-[72px] bg-transparent">
-          <div className="container relative z-10 w-full px-4 sm:px-6 mx-auto text-left overflow-hidden sm:overflow-visible">
-            <div className="max-w-2xl pt-8 pb-12 break-words">
-              <h1 className="text-3xl leading-[1.1] sm:text-4xl md:text-[56px] md:leading-[1.05] font-bold text-white drop-shadow-lg">
-                <span className="block text-primary drop-shadow-2xl">Simplifying Life With  </span>
-                <span className="block text-white/90 pt-2">EffortLess Cleaning Services</span>
-              </h1>
-
-              <p className="mt-4 text-[14px] font-medium leading-6 sm:text-[16px] sm:leading-7 text-white/90 drop-shadow-md">
-                MyCleaners picks up, cleans, and delivers your laundry and dry cleaning.
+        <div className="absolute inset-0 flex items-center pt-[104px] pb-12 sm:pt-[128px] md:pb-0 md:pt-[72px]">
+          <div className="container relative z-10 w-full px-4 sm:px-6 mx-auto text-left">
+            <div className="max-w-[33rem] break-words [text-shadow:0_2px_20px_rgba(0,0,0,0.45)]">
+              {/* Eyebrow. One line of uppercase sets the hierarchy: category,
+                  promise, then explanation. */}
+              <p className="flex items-center gap-3 text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-white/70">
+                <span className="h-px w-8 shrink-0 bg-primary" aria-hidden="true" />
+                Cleaning made simple
               </p>
 
-              <div className="mt-8 sm:mt-10 pointer-events-auto">
-                <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+              {/* Only one phrase is orange, so the accent reads as emphasis
+                  instead of half the headline. */}
+              <h1 className="mt-5 text-[2.125rem] font-bold leading-[1.1] tracking-[-0.02em] text-white sm:text-[2.75rem] lg:text-[3.125rem]">
+                Simplifying Home &amp; Life
+                <span className="mt-1 block text-white/90">
+                  with <span className="text-primary">effortless cleaning.</span>
+                </span>
+              </h1>
+
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-white/75 sm:text-[1.0625rem]">
+                Laundry, dry cleaning &amp; home cleaning — picked up from your
+                doorstep and delivered back fresh.
+              </p>
+
+              {/* Leading dots rather than " · " between items: the row wraps on
+                  narrow phones, and a separator that ends up at the start of the
+                  second line reads as a typo. A dot owned by its own item always
+                  travels with its label. */}
+              <ul className="mt-5 flex flex-wrap items-center gap-x-3.5 gap-y-1.5 text-sm font-medium text-white/70">
+                {SERVICE_LINKS.map(({ label, href }) => (
+                  <li key={label} className="flex items-center gap-2">
+                    <span
+                      className="size-1 shrink-0 rounded-full bg-white/35"
+                      aria-hidden="true"
+                    />
+                    <Link
+                      href={href}
+                      className="underline-offset-4 transition-colors duration-200 hover:text-primary hover:underline"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Secondary action points at the human, not another product page:
+                  a visitor who is not ready to book wants to ask a question.
+                  "Explore Services" is already one tap away in the navbar. */}
+              <div className="mt-8 sm:mt-9 pointer-events-auto">
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:gap-4">
+                  <SchedulePickupButton
+                    label="Schedule a Pickup"
+                    size="md"
+                    className="h-12 w-full justify-center text-base sm:w-auto sm:px-7"
+                  />
                   <Link
-                    href={`${SITE_WHATSAPP_LINK}?text=Hello%2C%20I%20am%20interested%20in%20your%20services%20%0Akindly%20take%20a%20look`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-8 py-3 text-center text-lg font-semibold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg shadow-primary/30 transition-all duration-200"
+                    href="/contact"
+                    className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/30 bg-white/[0.06] px-7 text-base font-semibold text-white backdrop-blur-md transition-colors duration-200 hover:border-white/60 hover:bg-white/15 sm:w-auto"
                   >
-                    Pickup Order
+                    Contact Us
+                    <ArrowRightIcon
+                      size={17}
+                      strokeWidth={2.2}
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
                   </Link>
-                  <Button variant="outline" size="md" className="w-full sm:w-auto px-8 py-3 text-lg bg-black/20 hover:bg-black/40 text-white border-white/50 backdrop-blur-sm shadow-xl" asChild>
-                    <a href={APP_LINKS.android} target="_blank" rel="noopener noreferrer">
-                      Download App
-                    </a>
-                  </Button>
                 </div>
               </div>
             </div>
@@ -67,4 +126,3 @@ export function IntroVideo() {
     </section>
   );
 }
-

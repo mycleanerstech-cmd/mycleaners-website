@@ -3,8 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "MyCleaners — India's Largest Dry Clean And Laundry Chain",
-    template: "%s | MyCleaners",
+    default: "Mycleaners — India's Largest Dry Clean And Laundry Chain",
+    template: "%s | Mycleaners",
   },
   description:
     "India's 1st organized chain of dry cleaning and laundry services. Pickup & delivery 7 days a week at your doorstep across 50+ cities.",

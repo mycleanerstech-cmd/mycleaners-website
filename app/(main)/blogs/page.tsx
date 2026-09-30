@@ -4,12 +4,11 @@ import blogs from "@/mock/blogs.json";
 
 import type { BlogPost } from "@/types/content";
 import { BlogListingSection } from "@/components/sections/blog/BlogListingSection";
-import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Blogs | ${SITE_NAME}`,
+  title: "Blogs",
   description:
-    "Read the latest laundry and dry cleaning tips, fabric care guides, and updates from MyCleaners.",
+    "Read the latest laundry and dry cleaning tips, fabric care guides, and updates from Mycleaners.",
 };
 
 export default function BlogsPage() {

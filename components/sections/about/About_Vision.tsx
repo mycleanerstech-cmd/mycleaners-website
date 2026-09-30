@@ -30,7 +30,7 @@ export function About_Vision() {
                 and website support seamless online business. With over 150+
                 stores in 50+ cities across India, we aim to be the top laundry
                 and dry-cleaning provider and achieve 1,000 franchises by 2027.
-                MyCleaners has built a strong reputation as a reliable service
+                Mycleaners has built a strong reputation as a reliable service
                 provider, allowing franchisees to benefit from brand recognition,
                 instant reputation, and customer trust.
               </p>

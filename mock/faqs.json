@@ -2,12 +2,12 @@
   {
     "id": "1",
     "question": "How do I schedule my first pickup?",
-    "answer": "Once you've created your account, you can schedule through our website or the MyCleaners app (available on iOS and Android), or directly call our customer support at 97117 11011.",
+    "answer": "Once you've created your account, you can schedule through our website or the Mycleaners app (available on iOS and Android), or directly call our customer support at 97117 11011.",
     "category": "getting-started"
   },
   {
     "id": "2",
-    "question": "What services does MyCleaners provide?",
+    "question": "What services does Mycleaners provide?",
     "answer": "We offer dry cleaning, laundry (wash & fold, wash & iron, premium), steam ironing, shoe & bag cleaning, carpet & curtain cleaning, leather treatment, sofa cleaning, pest control, and repair services.",
     "category": "services"
   },
@@ -25,13 +25,13 @@
   },
   {
     "id": "5",
-    "question": "Does MyCleaners offer same-day delivery?",
+    "question": "Does Mycleaners offer same-day delivery?",
     "answer": "Yes! We provide Express Delivery for urgent orders and standard delivery within 24–48 hours at select outlets.",
     "category": "delivery"
   },
   {
     "id": "6",
-    "question": "Are MyCleaners services hygienic and safe?",
+    "question": "Are Mycleaners services hygienic and safe?",
     "answer": "Absolutely. We have implemented strict hygiene and sanitization protocols including machine disinfection and sealed packaging for all orders.",
     "category": "quality"
   },
@@ -43,8 +43,8 @@
   },
   {
     "id": "8",
-    "question": "Does MyCleaners have a mobile app?",
-    "answer": "Yes! The MyCleaners App is available on the Google Play Store and App Store, allowing you to book, track, and pay seamlessly from anywhere.",
+    "question": "Does Mycleaners have a mobile app?",
+    "answer": "Our mobile app is currently undergoing a major rebuild and is temporarily unavailable while we upgrade it. A much improved version is coming back soon — in the meantime, you can book a pickup, track your order, or reach us anytime through this website.",
     "category": "getting-started"
   }
 ]
