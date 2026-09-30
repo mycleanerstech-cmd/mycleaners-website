@@ -366,11 +366,6 @@ export function Navbar() {
             })}
           </ul>
 
-          {/* ── App Status ── */}
-          {/* Shown from lg up: below 1024px the links + logo already fill the row. */}
-          {/* The old Android/iOS links pointed at retired store listings, so the
-              app is teased as "Coming Soon" instead of linking anywhere. Swap
-              this back for two store badges when APP_AVAILABLE flips to true. */}
           {/* ── Schedule Pickup ── */}
           {/* Booking is the one action that has to stay reachable from every page,
               so it lives in the nav rather than only in the hero. It borrows the
@@ -379,11 +374,15 @@ export function Navbar() {
               the only thing legible against moving footage, and on the white nav
               the same shape reads as a partial orange rather than a solid block
               of brand colour. It carries a little more weight than the old static
-              badge because this one is a real, focusable link. */}
+              badge because this one is a real, focusable link.
+
+              Hidden below md: at phone widths it squeezed the logo and the
+              hamburger into the same row, and the drawer now carries the same CTA
+              as a full-width button. */}
           <Link
             href={PICKUP_HREF}
             className={cn(
-              "inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-full border px-4 text-[13px] font-semibold leading-none whitespace-nowrap transition-colors duration-200 xl:h-10 xl:px-5 xl:text-sm",
+              "hidden md:inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-full border px-4 text-[13px] font-semibold leading-none whitespace-nowrap transition-colors duration-200 xl:h-10 xl:px-5 xl:text-sm",
               isHeroNavbar
                 ? "border-white/25 bg-white/10 text-white hover:bg-white/20"
                 : "border-primary/30 bg-primary-light text-primary-dark hover:border-primary/50 hover:bg-primary/15"

@@ -105,9 +105,11 @@ export function About_Contact() {
         {/* The decorative lottie beside the form was removed: it left the form
             squeezed into 7 columns, which made every field too narrow to type
             into. The form now takes the full column, capped so fields stay a
-            comfortable line length instead of stretching edge to edge. */}
-        <div className="mx-auto w-full max-w-[720px]">
-          <div className="h-full rounded-2xl border border-border-light bg-surface p-4 shadow-card sm:p-6 lg:p-7">
+            comfortable line length instead of stretching edge to edge. The cap
+            was widened once the lottie went: at 720px the two-column row read as
+            a cramped strip on a desktop monitor. */}
+        <div className="mx-auto w-full max-w-[880px]">
+          <div className="h-full rounded-2xl border border-border-light bg-surface p-4 shadow-card sm:p-6 lg:p-8">
             <h2 className="text-center text-[24px] font-semibold text-dark sm:text-[30px] lg:text-[34px]">
               Contact Us
             </h2>

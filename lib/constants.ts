@@ -46,6 +46,9 @@ export const SITE_URL = "https://www.mycleaners.in";
  */
 export const PICKUP_HREF = "/schedule-pickup";
 
+/** The contact page, which carries the general enquiry form. */
+export const CONTACT_HREF = "/contact";
+
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Locations", href: "/locations" },

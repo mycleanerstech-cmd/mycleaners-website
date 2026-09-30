@@ -3,16 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { NAV_LINKS, SITE_WHATSAPP_LINK } from "@/lib/constants";
+import { NAV_LINKS, CONTACT_HREF, PICKUP_HREF, SCHEDULE_PICKUP_LABEL } from "@/lib/constants";
 import { useScrollLock } from "@/lib/hooks/useScrollLock";
 import { cn } from "@/lib/utils";
-import { AppComingSoonBadge } from "@/components/ui/AppComingSoonBadge";
-import {
-  ChevronDownIcon,
-  CloseIcon,
-  MobileIcon,
-  WhatsAppIcon,
-} from "@/components/ui/icons";
+import { ChevronDownIcon, CloseIcon } from "@/components/ui/icons";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -143,25 +137,25 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </nav>
 
         {/* Bottom CTA */}
-        <div className="px-6 py-6 border-t border-border space-y-3">
-          {/* App status only — the old store links pointed at retired listings.
-              Swap back for store badges when APP_AVAILABLE flips to true. */}
-          <div className="flex items-center justify-between gap-3 rounded-lg bg-surface px-4 py-3">
-            <span className="flex items-center gap-2.5 text-body-sm font-medium text-dark-secondary">
-              <MobileIcon size={18} className="shrink-0 text-dark-muted" />
-              Mobile App
-            </span>
-            <AppComingSoonBadge />
-          </div>
-          <a
-            href={SITE_WHATSAPP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#25D366]/10 text-[#128C7E] font-medium text-body-sm hover:bg-[#25D366]/20 transition-colors"
+        {/* The two actions that matter on a phone. The app badge that used to
+            sit here was a dead chip, and the nav already overflowed on small
+            screens, so booking gets the primary slot and the enquiry form the
+            secondary one. */}
+        <div className="space-y-3 border-t border-border px-6 py-6">
+          <Link
+            href={PICKUP_HREF}
+            onClick={onClose}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-body-md font-semibold text-white transition-colors hover:bg-primary-dark"
           >
-            <WhatsAppIcon size={18} className="shrink-0" />
-            <span>Chat on WhatsApp</span>
-          </a>
+            {SCHEDULE_PICKUP_LABEL}
+          </Link>
+          <Link
+            href={CONTACT_HREF}
+            onClick={onClose}
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary-light px-5 py-3.5 text-body-md font-semibold text-primary-dark transition-colors hover:border-primary/50 hover:bg-primary/15"
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
     </>

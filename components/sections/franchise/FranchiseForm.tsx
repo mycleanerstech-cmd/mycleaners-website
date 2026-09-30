@@ -126,8 +126,10 @@ export function FranchiseForm() {
       <div className="container py-10 sm:py-14">
         {/* Heading, then the form. It was a two-column split with the headline
             stacked in a narrow 4-column rail, which split "Most Rewarding
-            Business Ever!" across two lines and pushed the form off-centre. */}
-        <div className="mx-auto flex max-w-[680px] flex-col items-center">
+            Business Ever!" across two lines and pushed the form off-centre. The
+            cap was widened to 880px after that: at 680px the single column of
+            inputs read as cramped on desktop. */}
+        <div className="mx-auto flex max-w-[880px] flex-col items-center">
           <h2 className="text-center text-[26px] leading-[1.2] font-normal text-primary sm:text-[34px]">
             Most Rewarding Business Ever!
           </h2>
