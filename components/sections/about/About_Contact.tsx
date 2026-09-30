@@ -1,6 +1,5 @@
 "use client";
 
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useState } from "react";
 
 import {
@@ -103,137 +102,128 @@ export function About_Contact() {
   return (
     <section className="w-full bg-white">
       <div className="container py-6 sm:py-8 lg:py-10">
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-12 lg:items-stretch">
-          <div className="lg:col-span-5">
-            <div className="relative h-[220px] overflow-hidden rounded-2xl bg-surface sm:h-[300px] lg:h-full lg:min-h-[420px]">
-              <DotLottieReact
-                src="https://lottie.host/0f645258-b66f-4b1d-9810-7a6d535e6f30/28jDVsgJ6c.lottie"
-                loop
-                autoplay
-                className="h-full w-full"
-              />
-            </div>
-          </div>
+        {/* The decorative lottie beside the form was removed: it left the form
+            squeezed into 7 columns, which made every field too narrow to type
+            into. The form now takes the full column, capped so fields stay a
+            comfortable line length instead of stretching edge to edge. */}
+        <div className="mx-auto w-full max-w-[720px]">
+          <div className="h-full rounded-2xl border border-border-light bg-surface p-4 shadow-card sm:p-6 lg:p-7">
+            <h2 className="text-center text-[24px] font-semibold text-dark sm:text-[30px] lg:text-[34px]">
+              Contact Us
+            </h2>
+            <p className="mt-2 text-center text-body-sm text-dark-muted">
+              Tell us what you need and we will get back to you.
+            </p>
 
-          <div className="lg:col-span-7">
-            <div className="h-full rounded-2xl border border-border-light bg-surface p-4 shadow-card sm:p-6 lg:p-7">
-              <h2 className="text-center text-[24px] font-semibold text-dark sm:text-[30px] lg:text-[34px]">
-                Contact Us
-              </h2>
-              <p className="mt-2 text-center text-body-sm text-dark-muted">
-                Tell us what you need and we will get back to you.
-              </p>
+            {state.isDone ? (
+              <div className="mt-6">
+                <EnquirySuccess
+                  title="Thanks — we've got it"
+                  body="Your enquiry is with our team and someone will call you back shortly. For anything urgent, call or WhatsApp us and we'll sort it now."
+                />
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} noValidate className="mt-5 sm:mt-6">
+                <div className="grid grid-cols-1 gap-y-4 gap-x-3 md:grid-cols-2 md:gap-y-5">
+                  <Field label="Name" required error={errors.name}>
+                    <input
+                      value={form.name}
+                      onChange={(e) => setField("name", e.target.value)}
+                      placeholder="Your name"
+                      type="text"
+                      autoComplete="name"
+                      className={cn("h-12", errors.name ? CONTROL_INVALID : CONTROL)}
+                      aria-invalid={Boolean(errors.name)}
+                    />
+                  </Field>
 
-              {state.isDone ? (
-                <div className="mt-6">
-                  <EnquirySuccess
-                    title="Thanks — we've got it"
-                    body="Your enquiry is with our team and someone will call you back shortly. For anything urgent, call or WhatsApp us and we'll sort it now."
+                  {/* Errors are keyed by the form's own field names, mapped from
+                      the API's (`phone` → `mobile`) in the submit handler. */}
+                  <Field label="Mobile No." required error={errors.mobile}>
+                    <input
+                      value={form.mobile}
+                      onChange={(e) => setField("mobile", e.target.value)}
+                      placeholder="98765 43210"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      className={cn("h-12", errors.mobile ? CONTROL_INVALID : CONTROL)}
+                      aria-invalid={Boolean(errors.mobile)}
+                    />
+                  </Field>
+
+                  <div className="md:col-span-2">
+                    <Field
+                      label="This is about"
+                      required
+                      error={errors.enquiryType}
+                      hint="Pick the closest one"
+                    >
+                      <Select
+                        value={form.enquiryType}
+                        onChange={(value) => setField("enquiryType", value)}
+                        invalid={Boolean(errors.enquiryType)}
+                      >
+                        <option value="">Select a topic</option>
+                        {ENQUIRY_TYPES.map((type) => (
+                          <option key={type.value} value={type.value}>
+                            {type.label}
+                          </option>
+                        ))}
+                      </Select>
+                    </Field>
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <Field
+                      label="Your message"
+                      required
+                      error={errors.message}
+                      hint="A sentence or two is plenty"
+                    >
+                      <textarea
+                        value={form.message}
+                        onChange={(e) => setField("message", e.target.value)}
+                        placeholder="How can we help?"
+                        rows={3}
+                        className={cn("py-3", errors.message ? CONTROL_INVALID : CONTROL)}
+                        aria-invalid={Boolean(errors.message)}
+                      />
+                    </Field>
+                  </div>
+
+                  <Field
+                    label="City"
+                    error={errors.city}
+                    hint="Optional — helps us answer faster"
+                  >
+                    <input
+                      value={form.city}
+                      onChange={(e) => setField("city", e.target.value)}
+                      placeholder="Where are you?"
+                      type="text"
+                      autoComplete="address-level2"
+                      className={cn("h-12", CONTROL)}
+                    />
+                  </Field>
+                </div>
+
+                <Honeypot value={form.website} onChange={(value) => setField("website", value)} />
+
+                {state.formError && (
+                  <div className="mt-4">
+                    <FormError message={state.formError} />
+                  </div>
+                )}
+
+                <div className="mt-5 flex justify-center sm:mt-7">
+                  <SubmitButton
+                    isSubmitting={state.isSubmitting}
+                    label="Send Message"
                   />
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate className="mt-5 sm:mt-6">
-                  <div className="grid grid-cols-1 gap-y-4 gap-x-3 md:grid-cols-2 md:gap-y-5">
-                    <Field label="Name" required error={errors.name}>
-                      <input
-                        value={form.name}
-                        onChange={(e) => setField("name", e.target.value)}
-                        placeholder="Your name"
-                        type="text"
-                        autoComplete="name"
-                        className={cn("h-12", errors.name ? CONTROL_INVALID : CONTROL)}
-                        aria-invalid={Boolean(errors.name)}
-                      />
-                    </Field>
-
-                    {/* Errors are keyed by the form's own field names, mapped from
-                        the API's (`phone` → `mobile`) in the submit handler. */}
-                    <Field label="Mobile No." required error={errors.mobile}>
-                      <input
-                        value={form.mobile}
-                        onChange={(e) => setField("mobile", e.target.value)}
-                        placeholder="98765 43210"
-                        type="tel"
-                        inputMode="tel"
-                        autoComplete="tel"
-                        className={cn("h-12", errors.mobile ? CONTROL_INVALID : CONTROL)}
-                        aria-invalid={Boolean(errors.mobile)}
-                      />
-                    </Field>
-
-                    <div className="md:col-span-2">
-                      <Field
-                        label="This is about"
-                        required
-                        error={errors.enquiryType}
-                        hint="Pick the closest one"
-                      >
-                        <Select
-                          value={form.enquiryType}
-                          onChange={(value) => setField("enquiryType", value)}
-                          invalid={Boolean(errors.enquiryType)}
-                        >
-                          <option value="">Select a topic</option>
-                          {ENQUIRY_TYPES.map((type) => (
-                            <option key={type.value} value={type.value}>
-                              {type.label}
-                            </option>
-                          ))}
-                        </Select>
-                      </Field>
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <Field
-                        label="Your message"
-                        required
-                        error={errors.message}
-                        hint="A sentence or two is plenty"
-                      >
-                        <textarea
-                          value={form.message}
-                          onChange={(e) => setField("message", e.target.value)}
-                          placeholder="How can we help?"
-                          rows={3}
-                          className={cn("py-3", errors.message ? CONTROL_INVALID : CONTROL)}
-                          aria-invalid={Boolean(errors.message)}
-                        />
-                      </Field>
-                    </div>
-
-                    <Field
-                      label="City"
-                      error={errors.city}
-                      hint="Optional — helps us answer faster"
-                    >
-                      <input
-                        value={form.city}
-                        onChange={(e) => setField("city", e.target.value)}
-                        placeholder="Where are you?"
-                        type="text"
-                        autoComplete="address-level2"
-                        className={cn("h-12", CONTROL)}
-                      />
-                    </Field>
-                  </div>
-
-                  <Honeypot value={form.website} onChange={(value) => setField("website", value)} />
-
-                  {state.formError && (
-                    <div className="mt-4">
-                      <FormError message={state.formError} />
-                    </div>
-                  )}
-
-                  <div className="mt-5 flex justify-center sm:mt-7">
-                    <SubmitButton
-                      isSubmitting={state.isSubmitting}
-                      label="Send Message"
-                    />
-                  </div>
-                </form>
-              )}
-            </div>
+              </form>
+            )}
           </div>
         </div>
       </div>

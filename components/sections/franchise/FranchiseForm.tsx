@@ -124,145 +124,148 @@ export function FranchiseForm() {
       </div>
 
       <div className="container py-10 sm:py-14">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-4">
-            <p className="text-[24px] leading-[1.15] font-normal text-primary">Most Rewarding</p>
-            <p className="mt-1 text-[24px] leading-[1.15] font-normal text-primary">Business Ever!</p>
+        {/* Heading, then the form. It was a two-column split with the headline
+            stacked in a narrow 4-column rail, which split "Most Rewarding
+            Business Ever!" across two lines and pushed the form off-centre. */}
+        <div className="mx-auto flex max-w-[680px] flex-col items-center">
+          <h2 className="text-center text-[26px] leading-[1.2] font-normal text-primary sm:text-[34px]">
+            Most Rewarding Business Ever!
+          </h2>
 
-            <p className="mt-3 text-[16px] font-semibold text-dark">
+          <div className="mt-3 flex flex-col items-center gap-1 sm:flex-row sm:gap-6">
+            <p className="text-center text-[15px] font-semibold text-dark sm:text-[16px]">
               High Return On Investment
             </p>
-            <p className="mt-1 text-[16px] font-semibold text-dark">
+            <span aria-hidden="true" className="hidden h-4 w-px bg-primary/30 sm:block" />
+            <p className="text-center text-[15px] font-semibold text-dark sm:text-[16px]">
               Recession Free Business
             </p>
           </div>
 
-          <div className="lg:col-span-8">
-            <form onSubmit={handleSubmit} noValidate className="w-full max-w-[560px]">
-              <div className="rounded-2xl bg-white/80 p-6 shadow-card backdrop-blur-sm sm:p-7">
-                <h2 className="text-heading-md font-bold text-dark">
-                  Become a Franchise Partner
-                </h2>
-                <p className="mt-1 text-body-sm text-dark-muted">
-                  Share a few details and our franchise team will call you back.
-                </p>
+          <form onSubmit={handleSubmit} noValidate className="mt-8 w-full sm:mt-10">
+            <div className="rounded-2xl bg-white/80 p-6 shadow-card backdrop-blur-sm sm:p-8">
+              <h3 className="text-center text-heading-md font-bold text-dark">
+                Become a Franchise Partner
+              </h3>
+              <p className="mt-1 text-center text-body-sm text-dark-muted">
+                Share a few details and our franchise team will call you back.
+              </p>
 
-                {state.isDone ? (
-                  <div className="mt-6">
-                    <EnquirySuccess
-                      title="Thanks for your interest"
-                      body="Our franchise team has your details and will call you within one working day to talk through the model, investment, and next steps."
+              {state.isDone ? (
+                <div className="mt-6">
+                  <EnquirySuccess
+                    title="Thanks for your interest"
+                    body="Our franchise team has your details and will call you within one working day to talk through the model, investment, and next steps."
+                  />
+                </div>
+              ) : (
+                <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-7 sm:gap-5">
+                  <Field label="Name" required error={errors.name}>
+                    <input
+                      value={form.name}
+                      onChange={(e) => setField("name", e.target.value)}
+                      placeholder="Your name"
+                      type="text"
+                      autoComplete="name"
+                      className={cn("h-12", errors.name ? CONTROL_INVALID : CONTROL)}
+                      aria-invalid={Boolean(errors.name)}
+                    />
+                  </Field>
+
+                  {/* Errors are keyed by the form's own field names, mapped from
+                      the API's (`phone` → `mobile`) in the submit handler. */}
+                  <Field label="Mobile No." required error={errors.mobile}>
+                    <input
+                      value={form.mobile}
+                      onChange={(e) => setField("mobile", e.target.value)}
+                      placeholder="98765 43210"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      className={cn("h-12", errors.mobile ? CONTROL_INVALID : CONTROL)}
+                      aria-invalid={Boolean(errors.mobile)}
+                    />
+                  </Field>
+
+                  <Field
+                    label="City you want to operate in"
+                    required
+                    error={errors.cityInterest}
+                  >
+                    <input
+                      value={form.cityInterest}
+                      onChange={(e) => setField("cityInterest", e.target.value)}
+                      placeholder="e.g. Nagpur"
+                      type="text"
+                      autoComplete="address-level2"
+                      className={cn("h-12", errors.cityInterest ? CONTROL_INVALID : CONTROL)}
+                      aria-invalid={Boolean(errors.cityInterest)}
+                    />
+                  </Field>
+
+                  <Field label="Investment Budget" required error={errors.budget}>
+                    <Select
+                      value={form.budget}
+                      onChange={(value) => setField("budget", value)}
+                      invalid={Boolean(errors.budget)}
+                    >
+                      <option value="">Select a range</option>
+                      {FRANCHISE_BUDGETS.map((band) => (
+                        <option key={band.value} value={band.value}>
+                          {band.label}
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
+
+                  <Field
+                    label="Commercial Space"
+                    required
+                    error={errors.commercialSpace}
+                    hint="We can help you find a location if you don't have one"
+                  >
+                    <Select
+                      value={form.commercialSpace}
+                      onChange={(value) => setField("commercialSpace", value)}
+                      invalid={Boolean(errors.commercialSpace)}
+                    >
+                      <option value="">Select one</option>
+                      {COMMERCIAL_SPACE_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
+
+                  <Field
+                    label="Anything else?"
+                    error={errors.message}
+                    hint="Optional — your experience, timeline, or questions"
+                  >
+                    <textarea
+                      value={form.message}
+                      onChange={(e) => setField("message", e.target.value)}
+                      placeholder="Tell us about yourself or ask us anything"
+                      rows={3}
+                      className={cn("py-3", errors.message ? CONTROL_INVALID : CONTROL)}
+                    />
+                  </Field>
+
+                  <Honeypot value={form.website} onChange={(value) => setField("website", value)} />
+
+                  {state.formError && <FormError message={state.formError} />}
+
+                  <div className="mt-2 flex justify-center">
+                    <SubmitButton
+                      isSubmitting={state.isSubmitting}
+                      label="Request a Call Back"
                     />
                   </div>
-                ) : (
-                  <div className="mt-6 grid grid-cols-1 gap-4">
-                    <Field label="Name" required error={errors.name}>
-                      <input
-                        value={form.name}
-                        onChange={(e) => setField("name", e.target.value)}
-                        placeholder="Your name"
-                        type="text"
-                        autoComplete="name"
-                        className={cn("h-12", errors.name ? CONTROL_INVALID : CONTROL)}
-                        aria-invalid={Boolean(errors.name)}
-                      />
-                    </Field>
-
-                    {/* Errors are keyed by the form's own field names, mapped from
-                        the API's (`phone` → `mobile`) in the submit handler. */}
-                    <Field label="Mobile No." required error={errors.mobile}>
-                      <input
-                        value={form.mobile}
-                        onChange={(e) => setField("mobile", e.target.value)}
-                        placeholder="98765 43210"
-                        type="tel"
-                        inputMode="tel"
-                        autoComplete="tel"
-                        className={cn("h-12", errors.mobile ? CONTROL_INVALID : CONTROL)}
-                        aria-invalid={Boolean(errors.mobile)}
-                      />
-                    </Field>
-
-                    <Field
-                      label="City you want to operate in"
-                      required
-                      error={errors.cityInterest}
-                    >
-                      <input
-                        value={form.cityInterest}
-                        onChange={(e) => setField("cityInterest", e.target.value)}
-                        placeholder="e.g. Nagpur"
-                        type="text"
-                        autoComplete="address-level2"
-                        className={cn("h-12", errors.cityInterest ? CONTROL_INVALID : CONTROL)}
-                        aria-invalid={Boolean(errors.cityInterest)}
-                      />
-                    </Field>
-
-                    <Field label="Investment Budget" required error={errors.budget}>
-                      <Select
-                        value={form.budget}
-                        onChange={(value) => setField("budget", value)}
-                        invalid={Boolean(errors.budget)}
-                      >
-                        <option value="">Select a range</option>
-                        {FRANCHISE_BUDGETS.map((band) => (
-                          <option key={band.value} value={band.value}>
-                            {band.label}
-                          </option>
-                        ))}
-                      </Select>
-                    </Field>
-
-                    <Field
-                      label="Commercial Space"
-                      required
-                      error={errors.commercialSpace}
-                      hint="We can help you find a location if you don't have one"
-                    >
-                      <Select
-                        value={form.commercialSpace}
-                        onChange={(value) => setField("commercialSpace", value)}
-                        invalid={Boolean(errors.commercialSpace)}
-                      >
-                        <option value="">Select one</option>
-                        {COMMERCIAL_SPACE_OPTIONS.map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </Select>
-                    </Field>
-
-                    <Field
-                      label="Anything else?"
-                      error={errors.message}
-                      hint="Optional — your experience, timeline, or questions"
-                    >
-                      <textarea
-                        value={form.message}
-                        onChange={(e) => setField("message", e.target.value)}
-                        placeholder="Tell us about yourself or ask us anything"
-                        rows={3}
-                        className={cn("py-3", errors.message ? CONTROL_INVALID : CONTROL)}
-                      />
-                    </Field>
-
-                    <Honeypot value={form.website} onChange={(value) => setField("website", value)} />
-
-                    {state.formError && <FormError message={state.formError} />}
-
-                    <div className="mt-2">
-                      <SubmitButton
-                        isSubmitting={state.isSubmitting}
-                        label="Request a Call Back"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </form>
-          </div>
+                </div>
+              )}
+            </div>
+          </form>
         </div>
       </div>
 
