@@ -21,6 +21,7 @@ import {
   type PickupLeadInput,
 } from "@/lib/pickup-schema";
 import { EMPTY_SELECTION, resolveSelection, type StoreSelection, type StoreSummary } from "@/lib/stores";
+import { normalizeState } from "@/lib/india-states";
 import { SITE_PHONE_DISPLAY, SITE_WHATSAPP_LINK } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -224,7 +225,7 @@ export function SchedulePickupForm() {
       setConfirmation({
         store: payload.data.storeLocation ?? selectedStore?.name ?? "your nearest store",
         address: selectedStore
-          ? `${selectedStore.address}, ${selectedStore.city}, ${selectedStore.state}`
+          ? `${selectedStore.address}, ${selectedStore.city}, ${normalizeState(selectedStore.state)}`
           : "",
         phone: payload.data.storePhone ?? selectedStore?.phone ?? null,
         slot: slot?.label ?? "",

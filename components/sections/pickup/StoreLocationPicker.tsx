@@ -12,6 +12,7 @@ import {
   type StoreSelection,
   type StoreSummary,
 } from "@/lib/stores";
+import { normalizeState } from "@/lib/india-states";
 import { cn } from "@/lib/utils";
 
 /**
@@ -115,7 +116,8 @@ export function StoreLocationPicker({
               <span>
                 <span className="font-semibold text-dark">{selectedStore.name}</span>
                 <br />
-                {selectedStore.address}, {selectedStore.city}, {selectedStore.state}
+                {selectedStore.address}, {selectedStore.city},{" "}
+                {normalizeState(selectedStore.state)}
               </span>
             </p>
             <a

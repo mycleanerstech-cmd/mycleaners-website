@@ -9,7 +9,13 @@
  * The payload is deliberately flat and minimal (see `PickupStoreSummary` in the
  * API's `leads.repository.ts`): no coordinates, no email, no pricing keys. Only
  * the fields a customer needs to choose a branch and trust the choice.
+ *
+ * The `state` field is the one value here that arrives dirty — see
+ * `lib/india-states.ts`. Every read of it goes through `normalizeState` so the
+ * three dropdowns cannot disagree with each other.
  */
+
+import { normalizeState } from "@/lib/india-states";
 
 export type StoreSummary = {
   code: string;
@@ -34,19 +40,74 @@ function byName(a: string, b: string): number {
   return a.localeCompare(b, undefined, { sensitivity: "base" });
 }
 
-/** Every distinct state, sorted. Drives the first select. */
-export function listStates(stores: readonly StoreSummary[]): string[] {
-  return [...new Set(stores.map((store) => store.state).filter(Boolean))].sort(byName);
+/**
+ * Does this store belong to the chosen state?
+ *
+ * Compares normalised names on both sides. The `state` column is free text and
+ * carries several spellings of the same state, so matching it literally would
+ * drop real branches: pick "Uttar Pradesh" and the rows stored as "UP" or
+ * "Uttar pradesh" would vanish, leaving the customer unable to book from the
+ * city where those branches actually are.
+ */
+function inState(store: StoreSummary, state: string): boolean {
+  return normalizeState(store.state) === normalizeState(state);
 }
 
-/** Cities in a state, sorted. Drives the second select. */
+/** Every distinct state, sorted. Drives the first select. */
+export function listStates(stores: readonly StoreSummary[]): string[] {
+  return [...new Set(stores.map((store) => normalizeState(store.state)).filter(Boolean))].sort(
+    byName
+  );
+}
+
+/** Is this spelling nothing but capitals? `VARANASI`, `HIMACHAL PRADESH`. */
+function isShouting(value: string): boolean {
+  return value === value.toUpperCase() && value !== value.toLowerCase();
+}
+
+/** Does this store belong to the chosen city? */
+function inCity(store: StoreSummary, city: string): boolean {
+  return store.city.trim().toLowerCase() === city.trim().toLowerCase();
+}
+
+/**
+ * Cities in a state, deduped case-insensitively, sorted. Drives the second
+ * select.
+ *
+ * `city` is free text with the same problem as `state`: Uttar Pradesh ships
+ * both "Varanasi" and "VARANASI", which listed the city twice and then hid
+ * the branch behind the spelling the customer did not pick.
+ *
+ * There is no alias table for cities the way there is for states — a city's
+ * identity is its own name, and "Varanasi" and "Vasi" are different places. So
+ * the only folding done is case, and the label shown is the spelling the
+ * database uses most often, with an all-caps one losing to a mixed-case one on
+ * a tie.
+ */
 export function listCities(stores: readonly StoreSummary[], state: string): string[] {
   if (!state) return [];
-  return [
-    ...new Set(
-      stores.filter((store) => store.state === state).map((store) => store.city).filter(Boolean)
-    ),
-  ].sort(byName);
+
+  // Lowercased city -> how the database spells it -> how many stores use that.
+  const variants = new Map<string, Map<string, number>>();
+
+  for (const store of stores) {
+    if (!inState(store, state)) continue;
+    const city = store.city.trim();
+    if (!city) continue;
+
+    const key = city.toLowerCase();
+    const spellings = variants.get(key) ?? new Map<string, number>();
+    spellings.set(city, (spellings.get(city) ?? 0) + 1);
+    variants.set(key, spellings);
+  }
+
+  return [...variants.values()]
+    .map((spellings) =>
+      [...spellings].sort(
+        (a, b) => b[1] - a[1] || Number(isShouting(a[0])) - Number(isShouting(b[0]))
+      )[0][0]
+    )
+    .sort(byName);
 }
 
 /** Stores in a state+city, sorted by name. Drives the third select. */
@@ -57,7 +118,7 @@ export function listStores(
 ): StoreSummary[] {
   if (!state || !city) return [];
   return stores
-    .filter((store) => store.state === state && store.city === city)
+    .filter((store) => inState(store, state) && inCity(store, city))
     .sort((a, b) => byName(a.name, b.name));
 }
 
@@ -76,16 +137,20 @@ export function resolveSelection(
   stores: readonly StoreSummary[],
   next: Partial<StoreSelection>
 ): StoreSelection {
-  const state = next.state ?? "";
+  // Normalised, not passed through: the options come from `listStates`, so
+  // holding "UP" here would match no `<option>` and leave the select blank.
+  const state = normalizeState(next.state ?? "");
 
   if (!state) return EMPTY_SELECTION;
 
   const cities = listCities(stores, state);
-  const city = cities.includes(next.city ?? "")
-    ? (next.city as string)
-    : cities.length === 1
-      ? cities[0]
-      : "";
+  // Matched case-insensitively: the option list now folds spellings, so a city
+  // held in state from a stale list (or a deep link) must not be discarded just
+  // because the API has since respelled it.
+  const kept = cities.find(
+    (candidate) => candidate.toLowerCase() === (next.city ?? "").trim().toLowerCase()
+  );
+  const city = kept ?? (cities.length === 1 ? cities[0] : "");
 
   if (!city) return { state, city: "", storeCode: "" };
 
