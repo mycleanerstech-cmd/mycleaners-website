@@ -55,8 +55,11 @@ export function IntroVideo() {
           <div className="container relative z-10 w-full px-4 sm:px-6 mx-auto text-left">
             <div className="max-w-[33rem] break-words [text-shadow:0_2px_20px_rgba(0,0,0,0.45)]">
               {/* Eyebrow. One line of uppercase sets the hierarchy: category,
-                  promise, then explanation. */}
-              <p className="flex items-center gap-3 text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-white/70">
+                  promise, then explanation. Hidden below `sm`: on phones the
+                  video frame is short, and this line is the only part of the
+                  block that can be dropped without losing meaning — the H1 and
+                  subhead already carry the promise. */}
+              <p className="hidden items-center gap-3 text-[0.6875rem] font-semibold uppercase tracking-[0.28em] text-white/70 sm:flex">
                 <span className="h-px w-8 shrink-0 bg-primary" aria-hidden="true" />
                 Cleaning made simple
               </p>

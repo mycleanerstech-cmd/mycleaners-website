@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { StateImagesCarousel } from "@/components/sections/home/StateImagesCarousel";
 import { FranchiseForm } from "@/components/sections/franchise/FranchiseForm";
 import { City_We_Work } from "@/components/sections/City_We_Work";
 import { BecomeFranchisePartner } from "@/components/sections/BecomeFranchisePartner";
@@ -15,9 +14,10 @@ export const metadata: Metadata = {
 export default function FranchisePage() {
   return (
     <>
-      <StateImagesCarousel />
       {/* The live enquiry form. Was `Contact_For_Franchise`, a static section with
-          no form — this is the one that reaches the CRM. */}
+          no form — this is the one that reaches the CRM. The state-images
+          carousel used to sit above it and is gone: it pushed the form below the
+          fold on mobile for no buying signal. */}
       <FranchiseForm />
       {/* <CleaningServicesMarquee /> */}
       <Franchise_Testimonials />

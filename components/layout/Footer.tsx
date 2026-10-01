@@ -9,7 +9,6 @@ import {
   FOOTER_LINKS,
   SOCIAL_LINKS,
 } from "@/lib/constants";
-import { AppComingSoonBadge } from "@/components/ui/AppComingSoonBadge";
 import {
   PhoneIcon,
   MailIcon,
@@ -29,7 +28,7 @@ export function Footer() {
       <div className="container py-8 md:py-10">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:grid-cols-5 lg:gap-x-5 lg:gap-y-6">
           {/* Brand Column */}
-          <div className="lg:col-span-2 flex flex-col gap-3">
+          <div className="lg:col-span-3 flex flex-col gap-3">
             <Link href="/" aria-label={`${SITE_NAME} — Home`}>
               {/* Same scale steps as the navbar so the brand mark reads at an
                   identical size in both places. */}
@@ -126,24 +125,14 @@ export function Footer() {
           <FooterLinkGroup title="Company" links={FOOTER_LINKS.company} />
 
           {/* More */}
-          <div className="flex flex-col gap-4 md:col-span-2 md:flex-row md:items-start md:justify-between lg:col-span-2 lg:gap-6">
-            <div className="lg:flex-none">
-              <FooterLinkGroup title="More" links={FOOTER_LINKS.more} />
-            </div>
-
-            {/* App Status */}
-            {/* Not a link: the old store badges pointed at retired listings, so
-                the app is teased as "Coming Soon". Swap back for the two store
-                badges when APP_AVAILABLE flips to true. */}
-            <div className="flex w-full flex-col items-stretch gap-2.5 md:w-[220px] md:items-end">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45 md:text-right">
-                Mobile App
-              </span>
-              <AppComingSoonBadge tone="dark" className="w-full justify-center md:w-auto" />
-              <p className="text-caption leading-snug text-white/45">
-                iOS &amp; Android — launching soon.
-              </p>
-            </div>
+          {/* The "Mobile App — launching soon" block used to sit beside this
+              group, which is why the wrapper spanned two columns and the brand
+              column took two of five. With the app tease gone the grid has one
+              fewer thing to place, so this is a single column again and the
+              brand absorbs the freed space. Reintroduce the app block here once
+              the store listings are live. */}
+          <div className="md:col-span-2 lg:col-span-1">
+            <FooterLinkGroup title="More" links={FOOTER_LINKS.more} />
           </div>
         </div>
       </div>
