@@ -123,7 +123,12 @@ export function SchedulePickupForm() {
 
   // Stamped once on mount. A submit arriving within a few seconds of this is a
   // script, not a person filling in a pickup address.
-  const renderedAt = useRef(Date.now());
+  //
+  // Initialised to 0 and assigned in the mount effect below rather than with
+  // `useRef(Date.now())`: the React compiler rejects an impure call in the render
+  // body, because a render can be discarded or replayed and this is only
+  // meaningful once. Same approach as `useEnquirySubmit`.
+  const renderedAt = useRef(0);
 
   useEffect(() => {
     renderedAt.current = Date.now();
@@ -154,6 +159,11 @@ export function SchedulePickupForm() {
   // deep-linked selection — drop anything that no longer resolves instead of
   // letting them submit a store that isn't there.
   useEffect(() => {
+    // Reconciles a selection against the store list, so it is derived state
+    // rather than something this effect exists to sync. Suppressed because the
+    // `selection` field is also written by user input and by `resetForm`, so it
+    // cannot be computed during render without losing those writes.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setForm((prev) => {
       const next = resolveSelection(stores, prev.selection);
       const isSame =
