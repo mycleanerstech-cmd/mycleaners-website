@@ -27,12 +27,12 @@ const OFFICES: Office[] = [
     gstin: GSTIN,
   },
   {
-    city: "Gurgaon",
+    city: "Gurugram",
     officeType: "Corporate Office",
     icon: <BuildingIcon size={18} />,
     lines: [
-      "2nd Floor, Signature Tower III,",
-      "Tower D, Behind Google Headquarters, Sec 15-II",
+      "Inno House, Plot no. 9, Sector 32,",
+      "Gurugram, Haryana 122003",
     ],
   },
 ];
