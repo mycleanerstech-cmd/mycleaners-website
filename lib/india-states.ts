@@ -5,7 +5,7 @@
  * snapshot of `GET /website/stores` carried thirteen distinct strings for nine
  * real states:
  *
- *   'UP', 'Uttar Pradesh', 'Uttar pradesh'   → Uttar Pradesh
+ *   'UP', 'Uttar Pradesh', 'Uttar pradesh', 'Uttarpradesh' → Uttar Pradesh
  *   'Tripura', 'TRIPURA'                     → Tripura
  *   'HIMACHAL PRADESH'                       → Himachal Pradesh
  *   'Uttrakhand'                             → Uttarakhand  (a typo, not a state)
@@ -34,6 +34,7 @@ export const INDIAN_STATES = [
   "Bihar",
   "Chandigarh",
   "Chhattisgarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
   "Delhi",
   "Goa",
   "Gujarat",
@@ -139,6 +140,9 @@ Object.assign(ALIASES, {
   "nct of delhi": "Delhi",
   "national capital territory of delhi": "Delhi",
   "uttaranchal": "Uttarakhand",
+
+  // Missing space in a legacy store record.
+  uttarpradesh: "Uttar Pradesh",
 
   // The typo the store data actually ships: Uttrakhand.
   uttrakhand: "Uttarakhand",
