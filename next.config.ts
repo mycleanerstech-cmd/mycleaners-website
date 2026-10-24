@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    agentUpgrade: "security",
+  },
   reactCompiler: true,
   images: {
     formats: ["image/avif", "image/webp"],
