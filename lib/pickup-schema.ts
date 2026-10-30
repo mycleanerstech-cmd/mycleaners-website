@@ -40,12 +40,22 @@ export const SERVICE_TYPES = [
   { value: "other", label: "Other" },
 ] as const satisfies ReadonlyArray<{ value: (typeof SERVICE_TYPE_VALUES)[number]; label: string }>;
 
-export const PICKUP_SLOT_VALUES = ["morning", "afternoon", "evening"] as const;
+export const PICKUP_SLOT_VALUES = [
+  "9-11",
+  "11-1",
+  "1-3",
+  "3-5",
+  "5-7",
+  "7-9",
+] as const;
 
 export const PICKUP_SLOTS = [
-  { value: "morning", label: "Morning", hint: "8am – 12pm" },
-  { value: "afternoon", label: "Afternoon", hint: "12pm – 4pm" },
-  { value: "evening", label: "Evening", hint: "4pm – 8pm" },
+  { value: "9-11", label: "9 - 11 AM", hint: "Morning" },
+  { value: "11-1", label: "11 AM - 1 PM", hint: "Midday" },
+  { value: "1-3", label: "1 - 3 PM", hint: "Afternoon" },
+  { value: "3-5", label: "3 - 5 PM", hint: "Evening" },
+  { value: "5-7", label: "5 - 7 PM", hint: "Evening" },
+  { value: "7-9", label: "7 - 9 PM", hint: "Late evening" },
 ] as const satisfies ReadonlyArray<{ value: (typeof PICKUP_SLOT_VALUES)[number]; label: string; hint: string }>;
 
 /**

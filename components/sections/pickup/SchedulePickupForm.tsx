@@ -47,7 +47,7 @@ const EMPTY_FORM: FormState = {
   address: "",
   pincode: "",
   serviceType: "laundry",
-  slot: "morning",
+  slot: "9-11",
   // Tomorrow. A same-day pickup is not something the network can promise, and a
   // prefilled valid date removes the most common reason the form is abandoned.
   preferredDate: minPickupDate(),
