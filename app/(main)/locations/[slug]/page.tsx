@@ -20,6 +20,8 @@ type City = {
   state: string;
   storeCount?: number;
   isComingSoon?: boolean;
+  /** Optional local copy for store-level pages; city pages fall back to the shared line. */
+  description?: string;
 };
 
 type Props = { params: Promise<{ slug: string }> };
@@ -116,7 +118,8 @@ export default async function CityLocationPage({ params }: Props) {
               {city.name} Best<br className="hidden sm:block" /> Laundry & Dry Cleaning Services.
             </h1>
             <p className="mt-3 text-[14px] sm:text-[15px] text-dark-muted leading-relaxed">
-              Taking care of your clothes has never been easier. Mycleaners picks up, expertly cleans, and delivers your dry cleaning and laundry to your door.
+              {city.description ??
+                "Taking care of your clothes has never been easier. Mycleaners picks up, expertly cleans, and delivers your dry cleaning and laundry to your door."}
             </p>
             <p className="mt-2 text-[14px] sm:text-[15px] font-medium text-dark hidden sm:block">
               Mycleaners is ready to take care of your clothes.

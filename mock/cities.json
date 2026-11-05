@@ -412,5 +412,25 @@
     "storeCount": 1,
     "lat": 30.6557257,
     "lng": 76.8200648
+  },
+  {
+    "id": "47",
+    "name": "Vikrant Khand",
+    "slug": "vikrant-khand",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.8674944,
+    "lng": 81.0151155,
+    "description": "Right in the heart of Gomti Nagar, our Vikrant Khand studio handles everyday laundry, office wear and occasion outfits — with doorstep pickup across the neighbourhood."
+  },
+  {
+    "id": "48",
+    "name": "Sushant Golf City",
+    "slug": "sushant-golf-city",
+    "state": "Uttar Pradesh",
+    "storeCount": 1,
+    "lat": 26.7710552,
+    "lng": 80.9535249,
+    "description": "Our Sushant Golf City studio on Amar Shaheed Path brings doorstep laundry and dry cleaning to Golf City, Ansal Golf City and Bagiamau."
   }
 ]
