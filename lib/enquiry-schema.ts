@@ -96,6 +96,19 @@ export const enquiryLeadSchema = z.object({
     .max(120)
     .optional()
     .or(z.literal("").transform(() => undefined)),
+  /**
+   * Optional: the branch the enquiry is about, as its public store code (the
+   * same identifier the pickup form uses). Left empty — the default — means
+   * "Headquarters": our central team answers it. Picking a store routes the
+   * enquiry straight to that branch and it is alerted to call the customer,
+   * so support never has to touch it.
+   */
+  storeCode: z
+    .string()
+    .trim()
+    .max(64)
+    .optional()
+    .or(z.literal("").transform(() => undefined)),
   // Without these, a plain `z.object` strips the honeypot and the render
   // timestamp, so a bot submission is forwarded as a clean-looking lead and the
   // API's tripwire never sees it. The franchise schema below already includes

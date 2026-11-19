@@ -4,10 +4,11 @@ import { enquiryLeadSchema } from "@/lib/enquiry-schema";
 /**
  * Proxies the Contact Us form to the billing API as a `query_lead`.
  *
- * The enquiry is written **unrouted** upstream on purpose: a question like
- * "do you cover Nashik?" is not about any particular branch, so there is no
- * store to attach it to. The API's `websiteQueryLeadSchema` has no store field
- * at all, which is what keeps a form that never asks for one honest.
+ * The store on the form is **optional, and empty is the default**: a question
+ * like "do you cover Nashik?" is not about any particular branch, so it is
+ * written unrouted and lands in the CRM's headquarters queue. If the customer
+ * does pick a store, the enquiry is routed straight to that branch and the
+ * branch is alerted to call the customer — support never has to touch it.
  */
 export async function POST(request: Request) {
   return handleEnquiryRoute({

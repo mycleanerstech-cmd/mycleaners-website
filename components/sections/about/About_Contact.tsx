@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   CONTROL,
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/EnquiryForm";
 import { useEnquirySubmit } from "@/components/ui/useEnquirySubmit";
 import { ENQUIRY_LEAD_SOURCE, ENQUIRY_TYPES, enquiryLeadSchema } from "@/lib/enquiry-schema";
+import type { StoreSummary } from "@/lib/stores";
 import { cn } from "@/lib/utils";
 
 type FormState = {
@@ -22,6 +23,8 @@ type FormState = {
   enquiryType: string;
   message: string;
   city: string;
+  /** Empty = Headquarters (the default): our central team answers. */
+  storeCode: string;
   /** Honeypot. Hidden from people, irresistible to bots. */
   website: string;
 };
@@ -32,18 +35,18 @@ const EMPTY_FORM: FormState = {
   enquiryType: "",
   message: "",
   city: "",
+  storeCode: "",
   website: "",
 };
 
 /**
  * The Contact Us form. Also used on the About page, so it must stay compact.
  *
- * Sends name, phone, an enquiry type, a message, and an optional city. It asks
- * for **no store**, and that is deliberate rather than an omission: a question
- * like "do you cover Nashik?" or "what does a sofa cost?" is not about any one
- * branch, so the lead is created unrouted and lands in the CRM's global queue
- * for the central team. Forcing a branch would drop exactly the enquiries this
- * form exists to catch.
+ * Sends name, phone, an enquiry type, a message, an optional city, and an
+ * optional store. The store is a choice between "Headquarters" (the default —
+ * our central team answers) and a specific branch: a customer who knows which
+ * branch the question is about picks it, and the enquiry goes straight to that
+ * branch's queue with an alert — the branch calls, support stays out of it.
  *
  * Email is absent on purpose. `Lead` has no email column, it would only land in
  * a raw JSON field the CRM does not display, and phone is the channel the team
@@ -54,9 +57,29 @@ const EMPTY_FORM: FormState = {
  */
 export function About_Contact() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
+  const [stores, setStores] = useState<StoreSummary[]>([]);
   const { state, submit, clearFieldError, setValidationErrors } = useEnquirySubmit();
 
   const errors = state.fieldErrors;
+
+  // One fetch of the active network, straight from the same proxy the pickup
+  // form uses. Failure is non-fatal: the enquiry stays valid without a store
+  // choice, and Headquarters is the default anyway.
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("/api/stores", { signal: controller.signal })
+      .then((res) => res.json())
+      .then((payload) => {
+        const stores = payload?.data?.stores
+        if (Array.isArray(stores)) setStores(stores as StoreSummary[]);
+      })
+      .catch(() => {
+        /* the picker stays hidden behind its Headquarters default */
+      });
+
+    return () => controller.abort();
+  }, []);
 
   function setField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -80,6 +103,7 @@ export function About_Contact() {
       enquiryType: form.enquiryType,
       message: form.message,
       city: form.city,
+      storeCode: form.storeCode || undefined,
       website: form.website,
     };
 
@@ -145,7 +169,7 @@ export function About_Contact() {
                     <input
                       value={form.mobile}
                       onChange={(e) => setField("mobile", e.target.value)}
-                      placeholder="98765 43210"
+                      placeholder="Enter mobile number"
                       type="tel"
                       inputMode="tel"
                       autoComplete="tel"
@@ -202,11 +226,30 @@ export function About_Contact() {
                     <input
                       value={form.city}
                       onChange={(e) => setField("city", e.target.value)}
-                      placeholder="Where are you?"
+                      placeholder="Enter city"
                       type="text"
                       autoComplete="address-level2"
                       className={cn("h-12", CONTROL)}
                     />
+                  </Field>
+
+                  <Field
+                    label="Store"
+                    error={errors.storeCode}
+                    hint="Optional — pick a store and they call you directly"
+                  >
+                    <Select
+                      value={form.storeCode}
+                      onChange={(value) => setField("storeCode", value)}
+                      invalid={Boolean(errors.storeCode)}
+                    >
+                      <option value="">Headquarters — our central team will help</option>
+                      {stores.map((store) => (
+                        <option key={store.code} value={store.code}>
+                          {store.name} — {store.city}
+                        </option>
+                      ))}
+                    </Select>
                   </Field>
                 </div>
 
