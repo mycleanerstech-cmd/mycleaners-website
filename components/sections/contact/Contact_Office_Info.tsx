@@ -31,8 +31,9 @@ const OFFICES: Office[] = [
     officeType: "Corporate Office",
     icon: <BuildingIcon size={18} />,
     lines: [
-      "Inno House, Plot no. 9, Sector 32,",
-      "Gurugram, Haryana 122003",
+      "2nd and 4th Floor, SIGNATURE TOWER-3, Tower D,",
+      "Galaxy Rd, Sector 15 Part 2, Sector 15,",
+      "Gurugram, Haryana 122001",
     ],
   },
 ];
