@@ -1,5 +1,7 @@
+import { SITE_TAGLINE } from "@/lib/constants";
+
 export function CleaningServicesMarquee() {
-  const bannerText = "India's 1st Organized Chain of Cleaning Services";
+  const bannerText = SITE_TAGLINE;
   const bannerText2 = "Dry Cleaning and Laundry Services";
   const marqueeLine = `${bannerText}`;
   const marqueeLine2 = `${bannerText2}`;

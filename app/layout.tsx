@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { SITE_TAGLINE } from "@/lib/constants";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mycleaners — India's Largest Dry Clean And Laundry Chain",
+    default: `Mycleaners — ${SITE_TAGLINE}`,
     template: "%s | Mycleaners",
   },
   description:
-    "India's 1st organized chain of dry cleaning and laundry services. Pickup & delivery 7 days a week at your doorstep across 50+ cities.",
+    "India's 1st organised laundry and drycleaning franchise chain. Pickup & delivery 7 days a week at your doorstep across 50+ cities.",
   metadataBase: new URL("https://www.mycleaners.in"),
   icons: {
     icon: "/favicon/favicon.png",

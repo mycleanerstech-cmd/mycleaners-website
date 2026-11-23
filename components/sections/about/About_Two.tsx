@@ -13,8 +13,9 @@ export function About_Two() {
           </p>
 
           <p className="text-[14px] leading-[1.7] font-normal tracking-[0.005em] text-[#777777] sm:text-[15px] md:text-[16px] lg:text-[18px]">
-            As the largest laundry and dry cleaning chain in India, with over
-            150+ stores in 50+ cities, our dynamic team combines the energy of
+            As India&apos;s 1st organised laundry and drycleaning franchise
+            chain, with over 150+ stores in 50+ cities, our dynamic team
+            combines the energy of
             young leaders with the experience of industry experts, all working
             towards our goal of becoming the best cleaning service provider.
           </p>

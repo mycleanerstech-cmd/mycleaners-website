@@ -15,7 +15,7 @@ export const REGISTERED_OFFICE_ADDRESS = [
   "South Delhi, Delhi 110025",
 ];
 
-export const SITE_TAGLINE = "India's Largest Dry Clean And Laundry Chain";
+export const SITE_TAGLINE = "India's 1st organised laundry and drycleaning franchise chain";
 export const SITE_PHONE = "9711711011";
 export const SITE_PHONE_DISPLAY = "97117 11011";
 /**

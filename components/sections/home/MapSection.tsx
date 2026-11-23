@@ -99,9 +99,9 @@ export function MapSection() {
             <SectionHeader
               title={
                 <>
-                  <span className="block text-primary">India&apos;s 1st</span>
-                  <span className="block text-primary">organized chain</span>
-                  <span className="block mt-2">Of Cleaning services</span>
+                  <span className="block text-primary">India&apos;s 1st organised</span>
+                  <span className="block text-primary">laundry and drycleaning</span>
+                  <span className="block mt-2">franchise chain</span>
                 </>
               }
               // subtitle="Explore our rapidly expanding footprint across India. Our professional hubs ensure uniform quality and timely deliveries everywhere."

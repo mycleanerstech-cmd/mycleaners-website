@@ -13,6 +13,7 @@ import {
   Select,
   SubmitButton,
 } from "@/components/ui/EnquiryForm";
+import { SITE_TAGLINE } from "@/lib/constants";
 import { useEnquirySubmit } from "@/components/ui/useEnquirySubmit";
 import {
   COMMERCIAL_SPACE_OPTIONS,
@@ -275,7 +276,7 @@ export function FranchiseForm() {
       <div className="bg-primary py-4">
         <div className="container">
           <p className="text-center text-[18px] font-semibold text-white sm:text-[22px]">
-            India&apos;s 1st Organized Chain of Cleaning Services
+            {SITE_TAGLINE}
           </p>
         </div>
       </div>

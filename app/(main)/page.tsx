@@ -14,8 +14,8 @@ import { AppComingSoonSection } from "@/components/sections/home/AppComingSoonSe
 
 export const metadata: Metadata = {
   // Title intentionally omitted: the root layout default already renders
-  // "Mycleaners — India's Largest Dry Clean And Laundry Chain". Setting it here
-  // would double the brand via the layout title template.
+  // "Mycleaners — India's 1st organised laundry and drycleaning franchise
+  // chain". Setting it here would double the brand via the layout title template.
   description:
     "Doorstep laundry and dry cleaning with convenient pickup & delivery. Book online with Mycleaners for expert garment care, transparent pricing, and reliable service across India.",
 };

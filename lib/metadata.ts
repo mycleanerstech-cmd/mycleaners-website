@@ -19,7 +19,7 @@ export function generatePageMetadata({
   const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — ${SITE_TAGLINE}`;
   const fullDescription =
     description ??
-    "India's 1st organized chain of dry cleaning and laundry services. Pickup & delivery 7 days a week at your doorstep.";
+    "India's 1st organised laundry and drycleaning franchise chain. Pickup & delivery 7 days a week at your doorstep.";
   const url = `${SITE_URL}${path}`;
 
   return {

@@ -3,6 +3,7 @@
 import { X } from "lucide-react";
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { SITE_TAGLINE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const inputClass =
@@ -214,7 +215,7 @@ export function CareerApplyModal({ open, onClose }: CareerApplyModalProps) {
           )}
 
           <p className="pt-1 text-center text-sm font-bold text-dark">
-            India&apos;s 1st Organized Chain of Cleaning Services
+            {SITE_TAGLINE}
           </p>
         </form>
       </div>
